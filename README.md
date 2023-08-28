@@ -34,7 +34,7 @@ Feel free to add to the following lists:
 
 ### Skill List
 
-- 📋 [Single textured 3d cube](skills/cube)
+- 🚧 [Single textured 3d cube](skills/cube)
 - 📋 Flycam camera controller
 - 📋 First person camera controller (for desktop users)
 - 📋 Entity inspector (`bevy_inspector_egui`)
