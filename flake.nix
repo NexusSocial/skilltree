@@ -33,6 +33,7 @@
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = [
             rustToolchain
+            pkgs.pkg-config
 
             # Common cargo tools we often use
             pkgs.cargo-deny
@@ -44,7 +45,7 @@
           buildInputs = [
             pkgs.zstd
           ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux (with pkgs; [
-            alsa-lib.dev
+            alsa-lib
             libxkbcommon
             udev
             vulkan-loader
