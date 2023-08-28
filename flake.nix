@@ -44,7 +44,7 @@
           buildInputs = [
             pkgs.zstd
           ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux (with pkgs; [
-            alsa-lib
+            alsa-lib.dev
             libxkbcommon
             udev
             vulkan-loader
@@ -52,7 +52,7 @@
             xorg.libX11
             xorg.libXcursor
             xorg.libXi
-          xorg.libXrandr
+            xorg.libXrandr
           ]) ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
             pkgs.darwin.apple_sdk.frameworks.Cocoa
             rustPlatform.bindgenHook
