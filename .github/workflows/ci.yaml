@@ -1,0 +1,33 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  fmt:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache cargo dependencies
+        uses: Swatinem/rust-cache@v2
+
+      - name: Check formatting
+        run: cargo fmt --check --all
+
+  check:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache cargo dependencies
+        uses: Swatinem/rust-cache@v2
+      - name: Clippy lints
+        run: cargo clippy --all --all-features --all-targets --no-deps
+      - name: Cargo Doc
+        run: cargo doc --all --all-features --no-deps --document-private-items
+      - name: Cargo Test
+        run: cargo test --all --all-features --all-targets

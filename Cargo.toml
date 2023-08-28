@@ -1,0 +1,19 @@
+[workspace]
+resolver = "2"
+members = [
+	"skills/cube"
+]
+
+# These settings will apply to all members of the workspace that opt in to them
+[workspace.package]
+version = "0.0.0"
+license = "MIT OR BSD-2-Clause-Patent"
+repository = "https://github.com/NexusSocial/skilltree"
+edition = "2021"
+rust-version = "1.72.0"
+
+[workspace.dependencies]
+eyre = "0.6"
+color-eyre = "0.6"
+bevy = "0.11"
+tracing = "0.1"
