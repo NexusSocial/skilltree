@@ -23,11 +23,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Install nix
+        uses: cachix/install-nix-action@v22
+      - name: Set up nix cache
+        uses: cachix/cachix-action@v12
+        continue-on-error: true
+        with:
+          name: nexus-skilltree
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Cache cargo dependencies
         uses: Swatinem/rust-cache@v2
       - name: Clippy lints
-        run: cargo clippy --all --all-features --all-targets --no-deps
+        run: |
+          nix develop -c \
+            cargo clippy --all --all-features --all-targets --no-deps
       - name: Cargo Doc
-        run: cargo doc --all --all-features --no-deps --document-private-items
+        run: |
+          nix develop -c \
+            cargo doc --all --all-features --no-deps --document-private-items
       - name: Cargo Test
-        run: cargo test --all --all-features --all-targets
+        run: |
+          nix develop -c \
+            cargo test --all --all-features --all-targets
