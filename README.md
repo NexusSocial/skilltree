@@ -37,20 +37,24 @@ Feel free to add to the following lists:
 - 📋 [Single textured 3d cube](skills/cube)
 - 📋 Flycam camera controller
 - 📋 First person camera controller (for desktop users)
-- 📋 Entity inspector
-- 📋 Loading a GLTF model (standard shader)
-- 📋 Loading a VRM model (standard shader)
-- 📋 Animating a skinned mesh with IK and FK
+- 📋 Entity inspector (`bevy_inspector_egui`)
+- 📋 Custom vertex and fragment shader in WGSL + bevy
+- 📋 Render a GLTF model (standard shader)
+- 📋 Render a VRM model (standard shader)
+- 📋 Animate a skinned mesh with IK and FK
+- 📋 Prove that custom vertex and fragment shaders on skinned meshes is possible
 - 📋 MToon shader implemented in WGSL + bevy
-- 📋 Side by side render to texture
+- 📋 Render to side-by-side texture
+- 📋 Display side-by-side textures as OpenVR overlay or stereokit window.
+  This is probably laggy, but allows use of VR before OpenXR is ready in bevy.
 - 📋 Spatial audio
-- 📋 Animating a skinned mesh with blendshapes/morph targets
+- 📋 Animate a skinned mesh with blendshapes/morph targets
 - 📋 Non-deformable physics
 - 📋 Jiggle physics/Dynamic bones
 - 📋 Cloth or hair physics
-- 📋 Hot reloading of shaders
-- 📋 Hot reloading of skinned meshes
-- 📋 Hot reloading of scene
+- 📋 Hot reload shaders (no lag spike)
+- 📋 Hot reload skinned meshes (no lag spike)
+- 📋 Hot reload scene (no lag spike)
 - 📋 Dynamic scaling of resolution
 - 📋 Touch controls for flat in-game surfaces
 - 📋 Dynamic foveated rendering
@@ -67,8 +71,7 @@ crates being developed to add openxr to bevy right now. See also
 - 📋 Comparison of different bevy networking libraries for shared state
 - 📋 Create a VOIP API, abstract it over transport, and compare latency
   of different web-compatible transports (probably WebRTC, WebTransport, WebSocket)
-- 📋 Auto atlasing, shader registry, and shader merging across all avatars in the
-  world
+- 📋 Explore auto atlasing, shader merging, shader registry (is it possible?)
 
 
 
