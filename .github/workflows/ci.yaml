@@ -35,13 +35,13 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - name: Clippy lints
         run: |
-          nix develop -c \
+          nix develop -ic \
             cargo clippy --all --all-features --all-targets --no-deps
       - name: Cargo Doc
         run: |
-          nix develop -c \
+          nix develop -ic \
             cargo doc --all --all-features --no-deps --document-private-items
       - name: Cargo Test
         run: |
-          nix develop -c \
+          nix develop -ic \
             cargo test --all --all-features --all-targets
