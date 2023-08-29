@@ -59,6 +59,12 @@ Feel free to add to the following lists:
 - 📋 Touch controls for flat in-game surfaces
 - 📋 Dynamic foveated rendering
 - 📋 Get tracked positions from SlimeVR/SolarXR
+- 📋 Laser pointers
+- 📋 Resizing and grabbing object
+- 📋 Friends list ( Social Feature )
+- 📋 Avatar list ( Social Feature )
+- 📋 Active game worlds ( Social Feature )
+- 📋 Invite and Invite accept ( Social Feature )
 - ❌ OpenXR render to headset (0dof)
 - ❌ OpenXR 6dof headset and controller tracking
 - ❌ OpenXR Vive trackers (`XR_HTCX_vive_tracker_interaction`)
