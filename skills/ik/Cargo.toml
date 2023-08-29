@@ -10,6 +10,4 @@ rust-version.workspace = true
 
 [dependencies]
 bevy.workspace = true
-color-eyre.workspace = true
-tracing.workspace = true
 bevy_mod_inverse_kinematics = "0.4.0"
