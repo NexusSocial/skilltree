@@ -14,4 +14,3 @@ authors = ["Ryan Butler <thebutlah@gmail.com>"]
 bevy.workspace = true
 color-eyre.workspace = true
 tracing.workspace = true
-tracing-subscriber.workspace = true

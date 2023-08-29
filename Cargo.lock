@@ -1410,7 +1410,6 @@ dependencies = [
  "bevy",
  "color-eyre",
  "tracing",
- "tracing-subscriber",
 ]
 
 [[package]]
@@ -1874,8 +1873,6 @@ version = "0.0.0"
 dependencies = [
  "bevy",
  "bevy_mod_inverse_kinematics",
- "color-eyre",
- "tracing",
 ]
 
 [[package]]
