@@ -79,8 +79,27 @@ crates being developed to add openxr to bevy right now. See also
   of different web-compatible transports (probably WebRTC, WebTransport, WebSocket)
 - 📋 Explore auto atlasing, shader merging, shader registry (is it possible?)
 
+## First time setup
 
+There are a few options to get set up. We suggest Option 1.
+Once you've done this first time setup, you can go read the README of any of
+the skills/demos that interest you for instructions on how to run them.
 
+### Option 1 (recommended): regular rust
+
+- Install [rustup](https://rustup.rs)
+- Install [bevy's dependencies](https://bevyengine.org/learn/book/getting-started/setup/#install-os-dependencies)
+- Install [git lfs](https://git-lfs.com/) and run `git lfs install && git lfs pull`
+
+### Option 2 (Linux and Mac only!): Nix package manager 
+
+- Have the [nix](https://nixos.org/download) package manager installed 
+- [Enable flakes](https://nixos.wiki/wiki/Flakes#Permanent)
+- `nix profile install nixpkgs#direnv`
+- [hook direnv into your shell](https://direnv.net/docs/hook.html)
+- `cp .envrc.example .envrc` - feel free to customize this
+- `direnv allow`
+- `git lfs install && git lfs pull`
 
 ## License
 
