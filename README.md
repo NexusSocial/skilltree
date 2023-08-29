@@ -41,7 +41,7 @@ Feel free to add to the following lists:
 - 📋 Custom vertex and fragment shader in WGSL + bevy
 - 📋 Render a GLTF model (standard shader)
 - 📋 Render a VRM model (standard shader)
-- 📋 Animate a skinned mesh with IK and FK
+- ✅ Animate a skinned mesh with IK and FK
 - 📋 Prove that custom vertex and fragment shaders on skinned meshes is possible
 - 📋 MToon shader implemented in WGSL + bevy
 - 📋 Render to side-by-side texture

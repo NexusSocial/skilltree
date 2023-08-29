@@ -1,7 +1,8 @@
 [workspace]
 resolver = "2"
 members = [
-	"skills/cube"
+	"skills/cube",
+	"skills/ik",
 ]
 
 # These settings will apply to all members of the workspace that opt in to them
