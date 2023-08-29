@@ -1,6 +1,5 @@
-use bevy::pbr::{DirectionalLightShadowMap};
+use bevy::pbr::DirectionalLightShadowMap;
 use bevy::prelude::*;
-use bevy::window::WindowResolution;
 use bevy_mod_inverse_kinematics::{IkConstraint, InverseKinematicsPlugin};
 use std::f32::consts::*;
 
@@ -38,12 +37,14 @@ fn setup(
 			parent.spawn(Camera3dBundle {
 				transform: Transform::from_xyz(-0.5, 1.5, 2.5)
 					.looking_at(Vec3::new(0.0, 1.0, 0.0), Vec3::Y),
-				projection: bevy::render::camera::Projection::Perspective(PerspectiveProjection {
-					fov: std::f32::consts::FRAC_PI_4,
-					aspect_ratio: 1.0,
-					near: 0.1,
-					far: 100.0,
-				}),
+				projection: bevy::render::camera::Projection::Perspective(
+					PerspectiveProjection {
+						fov: std::f32::consts::FRAC_PI_4,
+						aspect_ratio: 1.0,
+						near: 0.1,
+						far: 100.0,
+					},
+				),
 				..default()
 			});
 		});
@@ -74,7 +75,9 @@ fn setup(
 	commands.spawn((
 		SceneBundle {
 			scene: assets.load("malek.gltf#Scene0"),
-			transform: Transform::from_xyz(0.0, 0.0, 0.0).with_rotation(Quat::from_euler(EulerRot::XYZ, 0.0, 180.0_f32.to_radians(), 0.0)),
+			transform: Transform::from_xyz(0.0, 0.0, 0.0).with_rotation(
+				Quat::from_euler(EulerRot::XYZ, 0.0, 180.0_f32.to_radians(), 0.0),
+			),
 			..default()
 		},
 		Thing,
@@ -178,7 +181,8 @@ fn manually_target(
 		let view = transform.compute_matrix();
 		let viewport_rect = camera.logical_viewport_rect().unwrap();
 		let viewport_size = viewport_rect.size();
-		let adj_cursor_pos = event.position - Vec2::new(viewport_rect.min.x, viewport_rect.min.y);
+		let adj_cursor_pos =
+			event.position - Vec2::new(viewport_rect.min.x, viewport_rect.min.y);
 
 		let projection = camera.projection_matrix();
 		let far_ndc = projection.project_point3(Vec3::NEG_Z).z;
