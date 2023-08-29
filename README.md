@@ -34,7 +34,7 @@ Feel free to add to the following lists:
 
 ### Skill List
 
-- 🚧 [Single textured 3d cube](skills/cube)
+- ✅ [Single textured 3d cube](skills/cube)
 - 📋 Flycam camera controller
 - 📋 First person camera controller (for desktop users)
 - 📋 Entity inspector (`bevy_inspector_egui`)
@@ -85,7 +85,7 @@ There are a few options to get set up. We suggest Option 1.
 Once you've done this first time setup, you can go read the README of any of
 the skills/demos that interest you for instructions on how to run them.
 
-### Option 1 (recommended): regular rust
+### Option 1 (recommended): Regular rust
 
 - Install [rustup](https://rustup.rs)
 - Install [bevy's dependencies](https://bevyengine.org/learn/book/getting-started/setup/#install-os-dependencies)
