@@ -14,7 +14,8 @@ edition = "2021"
 rust-version = "1.72.0"
 
 [workspace.dependencies]
-eyre = "0.6"
-color-eyre = "0.6"
 bevy = "0.11"
+color-eyre = "0.6"
+eyre = "0.6"
 tracing = "0.1"
+tracing-subscriber = { verison = "0.3", features = ["env-filter", "tracing-log"] }

@@ -1410,6 +1410,7 @@ dependencies = [
  "bevy",
  "color-eyre",
  "tracing",
+ "tracing-subscriber",
 ]
 
 [[package]]
