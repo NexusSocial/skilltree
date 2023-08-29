@@ -681,6 +681,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_mod_inverse_kinematics"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c1e3090d4c9ef42055323e38d9feb99772dc1dcacb3be5da8cbdc8de947c1a51"
+dependencies = [
+ "bevy",
+]
+
+[[package]]
 name = "bevy_pbr"
 version = "0.11.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1857,6 +1866,16 @@ name = "hexf-parse"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dfa686283ad6dd069f105e5ab091b04c62850d3e4cf5d67debad1933f55023df"
+
+[[package]]
+name = "ik"
+version = "0.0.0"
+dependencies = [
+ "bevy",
+ "bevy_mod_inverse_kinematics",
+ "color-eyre",
+ "tracing",
+]
 
 [[package]]
 name = "image"
