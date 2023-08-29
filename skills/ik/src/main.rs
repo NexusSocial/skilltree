@@ -3,6 +3,7 @@ use bevy::prelude::*;
 use bevy_mod_inverse_kinematics::{IkConstraint, InverseKinematicsPlugin};
 use std::f32::consts::*;
 
+const ASSET_FOLDER: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/../../assets/");
 fn main() {
 	// This will take like 5 seconds to load the gltf/vrm model, don't worry, just wait.
 	App::new()
@@ -11,7 +12,10 @@ fn main() {
 			brightness: 1.0 / 5.0f32,
 		})
 		.insert_resource(DirectionalLightShadowMap { size: 4096 })
-		.add_plugins(DefaultPlugins)
+		.add_plugins(DefaultPlugins.set(AssetPlugin {
+			asset_folder: ASSET_FOLDER.to_string(),
+			..Default::default()
+		}))
 		.add_plugins(InverseKinematicsPlugin)
 		.add_systems(Startup, setup)
 		.add_systems(Update, animate_light_direction)
