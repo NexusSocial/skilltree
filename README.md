@@ -37,6 +37,7 @@ Feel free to add to the following lists:
 - ✅ [Single textured 3d cube](skills/cube)
 - 📋 Flycam camera controller
 - 📋 First person camera controller (for desktop users)
+- 📋 In game UI ( egui, bevyui, whatever )
 - 📋 Entity inspector (`bevy_inspector_egui`)
 - 📋 Custom vertex and fragment shader in WGSL + bevy
 - 📋 Render a GLTF model (standard shader)
