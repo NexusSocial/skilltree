@@ -3,6 +3,7 @@ resolver = "2"
 members = [
 	"skills/cube",
 	"skills/ik",
+	"skills/manipulation-flatscreen"
 ]
 
 # These settings will apply to all members of the workspace that opt in to them
@@ -14,7 +15,8 @@ edition = "2021"
 rust-version = "1.72.0"
 
 [workspace.dependencies]
-bevy = "0.11"
+bevy = "0.11.2"
+bevy_mod_picking = "0.15.0"
 color-eyre = "0.6"
 eyre = "0.6"
 tracing = "0.1"
