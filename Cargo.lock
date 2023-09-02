@@ -1566,6 +1566,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "flycam"
+version = "0.0.0"
+dependencies = [
+ "bevy",
+ "color-eyre",
+]
+
+[[package]]
 name = "fnv"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"

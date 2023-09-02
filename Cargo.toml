@@ -2,6 +2,7 @@
 resolver = "2"
 members = [
 	"skills/cube",
+	"skills/flycam",
 	"skills/ik",
 ]
 
