@@ -40,9 +40,8 @@ Feel free to add to the following lists:
 - 📋 In game UI ( egui, bevyui, whatever )
 - 📋 Entity inspector (`bevy_inspector_egui`)
 - 📋 Custom vertex and fragment shader in WGSL + bevy
-- 📋 Render a GLTF model (standard shader)
-- 📋 Render a VRM model (standard shader)
-- ✅ Animate a skinned mesh with IK and FK
+- ✅ [Render a GLTF/VRM model (standard shader)](skills/ik)
+- ✅ [Animate a skinned mesh with IK and FK](skills/ik)
 - 📋 Prove that custom vertex and fragment shaders on skinned meshes is possible
 - 📋 MToon shader implemented in WGSL + bevy
 - 📋 Render to side-by-side texture
@@ -61,14 +60,13 @@ Feel free to add to the following lists:
 - 📋 Dynamic foveated rendering
 - 📋 Get tracked positions from SlimeVR/SolarXR
 - 📋 Laser pointers
-- ✅ Rotating and resize flatscreen
+- ✅ [Rotating and resize flatscreen](skills/flatscreen-manipulation)
 - 📋 Friends list ( Social Feature )
 - 📋 Avatar list ( Social Feature )
 - 📋 Active game worlds ( Social Feature )
 - 📋 Invite and Invite accept ( Social Feature )
-- ❌ OpenXR render to headset (0dof)
-- ✅ OpenXR 6dof headset and controller tracking
-- ❌ OpenXR Vive trackers (`XR_HTCX_vive_tracker_interaction`)
+- ✅ [OpenXR 6dof headset and controller tracking](skills/openxr-6dof)
+- 📋 OpenXR Vive trackers (`XR_HTCX_vive_tracker_interaction`)
 
 Note: The OpenXR stuff should be unblocked soon, there are community
 crates being developed to add openxr to bevy right now. See also
