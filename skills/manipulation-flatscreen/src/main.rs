@@ -2,9 +2,7 @@ use bevy::ecs::system::EntityCommands;
 use bevy::{pbr::DirectionalLightShadowMap, prelude::*};
 use bevy_mod_picking::events::Drag;
 use bevy_mod_picking::pointer::PointerButton;
-use bevy_mod_picking::prelude::{
-	Click, On, Pointer, RaycastPickCamera, RaycastPickTarget,
-};
+use bevy_mod_picking::prelude::{On, Pointer, RaycastPickCamera, RaycastPickTarget};
 use bevy_mod_picking::{DefaultPickingPlugins, PickableBundle};
 use color_eyre::eyre::Result;
 use tracing::info;
