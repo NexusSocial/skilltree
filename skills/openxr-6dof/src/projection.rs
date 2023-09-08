@@ -1,30 +1,19 @@
 use bevy::core_pipeline::core_3d;
 use bevy::core_pipeline::tonemapping::{DebandDither, Tonemapping};
-use bevy::ecs::{
-	prelude::{Bundle, Component, ReflectComponent, Without},
-	system::{Query, ResMut, Resource},
-	world::EntityMut,
-};
-use bevy::hierarchy::BuildWorldChildren;
-use bevy::math::{Mat4, Quat, Vec3};
+use bevy::ecs::prelude::{Bundle, Component, ReflectComponent};
+
+use bevy::math::Mat4;
 use bevy::prelude::Camera3d;
 use bevy::reflect::{std_traits::ReflectDefault, Reflect};
 use bevy::render::view::ColorGrading;
 use bevy::render::{
-	camera::{
-		Camera, CameraProjection, CameraRenderGraph, ManualTextureViewHandle,
-		RenderTarget,
-	},
-	prelude::VisibilityBundle,
+	camera::{Camera, CameraProjection, CameraRenderGraph},
 	primitives::Frustum,
 	view::VisibleEntities,
 };
-use bevy::transform::{
-	components::{GlobalTransform, Transform},
-	TransformBundle,
-};
+use bevy::transform::components::{GlobalTransform, Transform};
 //  mostly copied from https://github.com/blaind/bevy_openxr/tree/main/crates/bevy_openxr/src/render_graph/camera
-use openxr::{Fovf, Quaternionf, Vector3f, View};
+use openxr::Fovf;
 
 #[derive(Bundle)]
 pub struct XrCameraBundle {
