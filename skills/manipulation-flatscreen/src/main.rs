@@ -1,9 +1,11 @@
-use bevy::{pbr::DirectionalLightShadowMap, prelude::*};
 use bevy::ecs::system::EntityCommands;
-use bevy_mod_picking::{DefaultPickingPlugins, PickableBundle};
+use bevy::{pbr::DirectionalLightShadowMap, prelude::*};
 use bevy_mod_picking::events::Drag;
 use bevy_mod_picking::pointer::PointerButton;
-use bevy_mod_picking::prelude::{Click, On, Pointer, RaycastPickCamera, RaycastPickTarget};
+use bevy_mod_picking::prelude::{
+	Click, On, Pointer, RaycastPickCamera, RaycastPickTarget,
+};
+use bevy_mod_picking::{DefaultPickingPlugins, PickableBundle};
 use color_eyre::eyre::Result;
 use tracing::info;
 
@@ -39,13 +41,16 @@ pub fn add_events(entity_commands: &mut EntityCommands) {
 						delta_x *= -1.0;
 					}
 
-					let axis_of_rotation = Vec3::new(delta_y, delta_x, 0.0).normalize_or_zero();
+					let axis_of_rotation =
+						Vec3::new(delta_y, delta_x, 0.0).normalize_or_zero();
 
 					// Compute the magnitude of rotation. You can scale this to adjust rotation speed
-					let rotation_magnitude = (delta_x.powi(2) + delta_y.powi(2)).sqrt() * 0.01;
+					let rotation_magnitude =
+						(delta_x.powi(2) + delta_y.powi(2)).sqrt() * 0.01;
 
 					// Create quaternion from axis-angle representation
-					let rotation_quat = Quat::from_axis_angle(axis_of_rotation, rotation_magnitude);
+					let rotation_quat =
+						Quat::from_axis_angle(axis_of_rotation, rotation_magnitude);
 					transform.rotation = rotation_quat * transform.rotation;
 				}
 				PointerButton::Secondary => {
@@ -55,11 +60,10 @@ pub fn add_events(entity_commands: &mut EntityCommands) {
 					transform.rotate_local_y((delta_y + delta_x) * 0.01);
 				}
 			}
-
 		}),
-		PickableBundle::default(),      // Makes the entity pickable
-		RaycastPickTarget::default()
-		));
+		PickableBundle::default(), // Makes the entity pickable
+		RaycastPickTarget::default(),
+	));
 }
 
 fn setup(
@@ -95,19 +99,21 @@ fn setup(
 		..default()
 	});
 	commands.insert_resource(DirectionalLightShadowMap { size: 4096 });
-	commands.spawn((Camera3dBundle {
-		transform: Transform::from_xyz(0.0, 6., 12.0)
-			.looking_at(Vec3::new(0., 1., 0.), Vec3::Y),
-		..default()
-
-	}, RaycastPickCamera::default()));
+	commands.spawn((
+		Camera3dBundle {
+			transform: Transform::from_xyz(0.0, 6., 12.0)
+				.looking_at(Vec3::new(0., 1., 0.), Vec3::Y),
+			..default()
+		},
+		RaycastPickCamera::default(),
+	));
 	commands.spawn(PbrBundle {
 		mesh: meshes.add(
 			shape::Plane {
 				size: 10.,
 				subdivisions: 4,
 			}
-				.into(),
+			.into(),
 		),
 		material: materials.add(Color::MIDNIGHT_BLUE.into()),
 		transform: Transform::from_xyz(0., 0., 0.),
