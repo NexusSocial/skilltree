@@ -3,7 +3,8 @@ resolver = "2"
 members = [
 	"skills/cube",
 	"skills/ik",
-	"skills/manipulation-flatscreen"
+	"skills/manipulation-flatscreen",
+	"skills/openxr-6dof",
 ]
 
 # These settings will apply to all members of the workspace that opt in to them
