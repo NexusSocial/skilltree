@@ -61,7 +61,7 @@ Feel free to add to the following lists:
 - 📋 Dynamic foveated rendering
 - 📋 Get tracked positions from SlimeVR/SolarXR
 - 📋 Laser pointers
-- 📋 Resizing and grabbing object
+- ✅ Rotating and resize flatscreen
 - 📋 Friends list ( Social Feature )
 - 📋 Avatar list ( Social Feature )
 - 📋 Active game worlds ( Social Feature )
