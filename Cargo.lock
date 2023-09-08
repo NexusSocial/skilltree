@@ -1118,7 +1118,7 @@ dependencies = [
 [[package]]
 name = "bevy_openxr"
 version = "0.1.0"
-source = "git+https://github.com/awtterpip/bevy_openxr?rev=9361991a5fba10629d16781479904d8ddf198f82#9361991a5fba10629d16781479904d8ddf198f82"
+source = "git+https://github.com/thebutlah/bevy_openxr?rev=df7e03c#df7e03c532f530d2f7e00d7734ac1da05129be3f"
 dependencies = [
  "anyhow",
  "ash",
