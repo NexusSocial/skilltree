@@ -36,12 +36,12 @@ jobs:
       - name: Clippy lints
         run: |
           nix develop -ic \
-            cargo clippy --all --all-features --all-targets --no-deps
+            cargo clippy --all --all-features --all-targets --no-deps -- -Dwarnings
       - name: Cargo Doc
         run: |
           nix develop -ic \
-            cargo doc --all --all-features --no-deps --document-private-items
+            cargo doc --all --all-features --no-deps --document-private-items -- -Dwarnings
       - name: Cargo Test
         run: |
           nix develop -ic \
-            cargo test --all --all-features --all-targets
+            cargo test --all --all-features --all-targets -- -Dwarnings
