@@ -67,7 +67,7 @@ Feel free to add to the following lists:
 - 📋 Active game worlds ( Social Feature )
 - 📋 Invite and Invite accept ( Social Feature )
 - ❌ OpenXR render to headset (0dof)
-- ❌ OpenXR 6dof headset and controller tracking
+- ✅ OpenXR 6dof headset and controller tracking
 - ❌ OpenXR Vive trackers (`XR_HTCX_vive_tracker_interaction`)
 
 Note: The OpenXR stuff should be unblocked soon, there are community

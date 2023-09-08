@@ -1,0 +1,15 @@
+[package]
+name = "openxr-6dof"
+version.workspace = true
+license.workspace = true
+repository.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+openxr = { version = "0.17.1" }
+bevy = { git = "https://github.com/awtterpip/bevy" }
+bevy_openxr = { git = "https://github.com/awtterpip/bevy_openxr", rev = "9361991a5fba10629d16781479904d8ddf198f82"}
+color-eyre.workspace = true
