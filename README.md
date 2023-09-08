@@ -8,7 +8,7 @@ and ecosystem maturity to build. This repo can be used to track Rust and bevy's
 that will serve to demonstrate what is and isn't possible right now in the
 ecosystem.
 
-Eventually when the skilltree is fleshed out enough, we will take this exporatory
+Eventually when the skilltree is fleshed out enough, we will take this exploratory
 work and translate it into a full fledged game.
 
 ## Repo Structure
