@@ -1,18 +1,16 @@
 //! A simple 3D scene with light shining over a cube sitting on a plane.
-mod projection;
+pub mod projection;
 
 use crate::projection::{XRProjection, XrCameraBundle};
 use bevy::prelude::Component;
-use bevy::render::camera::{CameraProjectionPlugin, Viewport};
+use bevy::render::camera::CameraProjectionPlugin;
 use bevy::render::view::{update_frusta, VisibilitySystems};
 use bevy::transform::TransformSystem;
 use bevy::{prelude::*, render::camera::RenderTarget};
 use bevy_openxr::input::XrInput;
-use bevy_openxr::resources::{XrFrameState, XrInstance, XrSession, XrViews};
+use bevy_openxr::resources::{XrFrameState, XrSession, XrViews};
 use bevy_openxr::{DefaultXrPlugins, LEFT_XR_TEXTURE_HANDLE, RIGHT_XR_TEXTURE_HANDLE};
-use openxr::{ActiveActionSet, FrameState, Path, Posef, Session};
-use std::ops::Deref;
-use std::sync::MutexGuard;
+use openxr::ActiveActionSet;
 
 fn main() {
 	color_eyre::install().unwrap();
@@ -109,8 +107,6 @@ fn setup(
 	));
 }
 
-struct HandState {}
-
 fn hands(
 	mut gizmos: Gizmos,
 	xr_input: Res<XrInput>,
@@ -124,7 +120,7 @@ fn hands(
 		//let b = pose.locate(&*xr_input.stage, a.predicted_display_time).unwrap();
 		let b = xr_input
 			.left_space
-			.relate(&*xr_input.stage, a.predicted_display_time)
+			.relate(&xr_input.stage, a.predicted_display_time)
 			.unwrap();
 		gizmos.rect(
 			b.0.pose.position.to_vec3(),
@@ -134,7 +130,7 @@ fn hands(
 		);
 		let c = xr_input
 			.right_space
-			.relate(&*xr_input.stage, a.predicted_display_time)
+			.relate(&xr_input.stage, a.predicted_display_time)
 			.unwrap();
 		gizmos.rect(
 			c.0.pose.position.to_vec3(),
@@ -184,8 +180,7 @@ fn head_movement(
 			}
 		}
 
-		for (mut transform, mut cam, camera_type, mut xr_projection) in query.iter_mut()
-		{
+		for (mut transform, _cam, camera_type, mut xr_projection) in query.iter_mut() {
 			let view_idx = match camera_type {
 				CameraType::Left => 0,
 				CameraType::Right => 1,
