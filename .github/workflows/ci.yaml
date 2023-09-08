@@ -40,8 +40,8 @@ jobs:
       - name: Cargo Doc
         run: |
           nix develop -ic \
-            cargo doc --all --all-features --no-deps --document-private-items -- -Dwarnings
+            cargo doc --all --all-features --no-deps --document-private-items
       - name: Cargo Test
         run: |
           nix develop -ic \
-            cargo test --all --all-features --all-targets -- -Dwarnings
+            cargo test --all --all-features --all-targets
