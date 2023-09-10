@@ -2,6 +2,7 @@
 resolver = "2"
 members = [
 	"skills/cube",
+	"skills/egui-texture",
 	"skills/ik",
 	"skills/manipulation-flatscreen",
 	"skills/openxr-6dof",
@@ -22,6 +23,11 @@ bevy_mod_picking = "0.15.0"
 color-eyre = "0.6"
 eyre = "0.6"
 tracing = "0.1"
+bevy_egui = "0.21"
+egui-wgpu = "0.22"
+bevy-inspector-egui = "0.19"
+wgpu = "0.16"
+bevy_flycam = { git = "https://github.com/sburris0/bevy_flycam", branch = "bevy_0.11" }
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]
