@@ -1,28 +1,12 @@
-
-
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
-
-
-
-
-
-
-
 use bevy::transform::components::Transform;
-//  mostly copied from https://github.com/blaind/bevy_openxr/tree/main/crates/bevy_openxr/src/render_graph/camera
-
-
-
-
-
-use bevy::{prelude::*};
+use bevy::prelude::*;
 use bevy_openxr::input::XrInput;
 use bevy_openxr::resources::XrFrameState;
 use bevy_openxr::xr_input::controllers::XrControllerType;
 use bevy_openxr::xr_input::oculus_touch::OculusController;
 use bevy_openxr::xr_input::{OpenXrInput, QuatConv, Vec3Conv};
 use bevy_openxr::DefaultXrPlugins;
-
 
 fn main() {
 	color_eyre::install().unwrap();
