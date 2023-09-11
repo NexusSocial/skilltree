@@ -11,5 +11,5 @@ rust-version.workspace = true
 [dependencies]
 openxr = { version = "0.17.1" }
 bevy = { git = "https://github.com/awtterpip/bevy" }
-bevy_openxr = { git = "https://github.com/thebutlah/bevy_openxr", rev = "df7e03c" }
+bevy_openxr = { git = "https://github.com/awtterpip/bevy_openxr", rev = "4da61df" }
 color-eyre.workspace = true
