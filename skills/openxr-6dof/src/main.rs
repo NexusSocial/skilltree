@@ -1,6 +1,6 @@
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
-use bevy::transform::components::Transform;
 use bevy::prelude::*;
+use bevy::transform::components::Transform;
 use bevy_openxr::input::XrInput;
 use bevy_openxr::resources::XrFrameState;
 use bevy_openxr::xr_input::controllers::XrControllerType;
