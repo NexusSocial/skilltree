@@ -3,7 +3,9 @@ use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::math::vec3;
 use bevy::prelude::*;
 use bevy::render::camera::RenderTarget;
-use bevy::render::render_resource::{Extent3d, TextureDescriptor, TextureDimension, TextureFormat, TextureUsages};
+use bevy::render::render_resource::{
+	Extent3d, TextureDescriptor, TextureDimension, TextureFormat, TextureUsages,
+};
 use bevy::transform::components::Transform;
 use bevy_openxr::input::XrInput;
 use bevy_openxr::resources::XrFrameState;
@@ -66,39 +68,48 @@ fn setup(
 	let image_handle = images.add(image);
 
 	// material for the mirror
-    let mirror_material_handle = materials.add(StandardMaterial {
-        base_color_texture: Some(image_handle.clone()),
-        reflectance: 0.02,
-        unlit: false,
-        ..default()
-    });
+	let mirror_material_handle = materials.add(StandardMaterial {
+		base_color_texture: Some(image_handle.clone()),
+		reflectance: 0.02,
+		unlit: false,
+		..default()
+	});
 	// the plane displaying the mirrors texture
-	let mirror = commands.spawn(PbrBundle {
-		mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2 { x: 2.0, y: 2.0}, flip: true})),
-		material: mirror_material_handle,
-		..default()
-	}).id();
+	let mirror = commands
+		.spawn(PbrBundle {
+			mesh: meshes.add(Mesh::from(shape::Quad {
+				size: Vec2 { x: 2.0, y: 2.0 },
+				flip: true,
+			})),
+			material: mirror_material_handle,
+			..default()
+		})
+		.id();
 	// camera for mirror
-	let camera = commands.spawn(
-        Camera3dBundle {
-            camera_3d: Camera3d {
-                clear_color: ClearColorConfig::Custom(Color::WHITE),
-                ..default()
-            },
-            camera: Camera {
-                // render before the "main pass" camera
-                order: -1,
-                target: RenderTarget::Image(image_handle.clone()),
-                ..default()
-            },
-			transform: Transform::from_xyz(0.0, 0.0, 0.0).with_rotation(Quat::from_euler(EulerRot::XYZ, 0.0, 180.0_f32.to_radians(), 0.0)),
-            ..default()
-        }
-    ).id();
-	commands.spawn(SpatialBundle {
-		transform: Transform::from_xyz(0.0, 1.0, -2.0),
-		..default()
-	}).push_children(&[camera, mirror]);
+	let camera = commands
+		.spawn(Camera3dBundle {
+			camera_3d: Camera3d {
+				clear_color: ClearColorConfig::Custom(Color::WHITE),
+				..default()
+			},
+			camera: Camera {
+				// render before the "main pass" camera
+				order: -1,
+				target: RenderTarget::Image(image_handle.clone()),
+				..default()
+			},
+			transform: Transform::from_xyz(0.0, 0.0, 0.0).with_rotation(
+				Quat::from_euler(EulerRot::XYZ, 0.0, 180.0_f32.to_radians(), 0.0),
+			),
+			..default()
+		})
+		.id();
+	commands
+		.spawn(SpatialBundle {
+			transform: Transform::from_xyz(0.0, 1.0, -2.0),
+			..default()
+		})
+		.push_children(&[camera, mirror]);
 
 	// plane
 	commands.spawn(PbrBundle {
