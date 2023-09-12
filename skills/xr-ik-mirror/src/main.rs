@@ -22,12 +22,7 @@ fn main() {
 		.add_plugins(FrameTimeDiagnosticsPlugin)
 		.add_plugins(bevy_mod_inverse_kinematics::InverseKinematicsPlugin)
 		.add_systems(Startup, setup)
-		.add_systems(Update, (hands,
-							  setup_ik,
-							  head_sync,
-							  body_sync
-							  )
-		)
+		.add_systems(Update, (hands, setup_ik, head_sync, body_sync))
 		.run();
 }
 
@@ -102,7 +97,9 @@ fn head_sync(
 ) {
 	let mut func = || -> color_eyre::Result<()> {
 		let frame_state = *frame_state.lock().unwrap();
-		let a = xr_input.head.relate(&xr_input.stage, frame_state.predicted_display_time)?;
+		let a = xr_input
+			.head
+			.relate(&xr_input.stage, frame_state.predicted_display_time)?;
 		for (mut head, _) in head_query.iter_mut() {
 			*head = Transform {
 				translation: a.0.pose.position.to_vec3(),
@@ -118,18 +115,20 @@ fn head_sync(
 fn body_sync(
 	frame_state: Res<XrFrameState>,
 	xr_input: Res<XrInput>,
-	mut avatar: Query<(&mut Transform, &Hips)>
+	mut avatar: Query<(&mut Transform, &Hips)>,
 ) {
 	let mut func = || -> color_eyre::Result<()> {
 		let frame_state = *frame_state.lock().unwrap();
-		let a = xr_input.head.relate(&xr_input.stage, frame_state.predicted_display_time)?;
+		let a = xr_input
+			.head
+			.relate(&xr_input.stage, frame_state.predicted_display_time)?;
 		for (mut avatar, _) in avatar.iter_mut() {
 			let head_pos = Transform {
 				translation: a.0.pose.position.to_vec3(),
 				rotation: Quat::IDENTITY,
 				scale: vec3(1.0, 1.0, 1.0),
 			};
-			*avatar = head_pos.with_translation(Vec3{
+			*avatar = head_pos.with_translation(Vec3 {
 				x: head_pos.translation.x,
 				y: head_pos.translation.y - 0.6,
 				z: head_pos.translation.z,
