@@ -5,6 +5,7 @@ members = [
 	"skills/ik",
 	"skills/manipulation-flatscreen",
 	"skills/openxr-6dof",
+	"skills/xr-ik-mirror",
 ]
 
 # These settings will apply to all members of the workspace that opt in to them
