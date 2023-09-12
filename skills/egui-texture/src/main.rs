@@ -1,3 +1,6 @@
+mod render_node;
+mod render_systems;
+
 use bevy::prelude::*;
 use bevy::render::render_asset::RenderAsset;
 use bevy::render::render_asset::RenderAssets;
@@ -12,8 +15,8 @@ use wgpu::util::RenderEncoder;
 
 fn main() -> Result<()> {
 	color_eyre::install()?;
-	App::new()
-		.add_plugins(DefaultPlugins)
+	let mut app = App::new();
+	app.add_plugins(DefaultPlugins)
 		.add_plugins(bevy_flycam::PlayerPlugin)
 		.add_plugins(bevy_egui::EguiPlugin)
 		.insert_resource(AmbientLight {
@@ -22,18 +25,23 @@ fn main() -> Result<()> {
 		})
 		.add_systems(Startup, setup)
 		.add_systems(Update, ui_example_system)
-		.add_systems(Update, update_egui_ui)
-		.run();
+		.add_systems(Update, update_egui_ui);
 
+	let Ok(render_app) = app.get_sub_app_mut(bevy::render::RenderApp) else {
+		panic!("The render plugin should have added this subapp");
+	};
+	render_app.add_systems(ExtractSchedule, crate::render_systems::add_render_node);
+
+	app.run();
 	Ok(())
 }
 
 #[derive(Component)]
 pub struct EguiContext {
 	output_texture: Handle<Image>,
-	renderer: egui_wgpu::Renderer,
 	ctx: egui::Context,
-	primitives: Vec<egui::ClippedPrimitive>,
+	egui_output: egui::FullOutput,
+	clipped_primitives: Vec<egui::ClippedPrimitive>,
 }
 
 fn setup(
@@ -48,20 +56,13 @@ fn setup(
 			data: vec![255; 512 * 512 * 4],
 			..default()
 		};
-		let output_texture_format = output_texture.texture_descriptor.format;
 		let output_texture = images.add(output_texture);
-		let renderer = egui_wgpu::Renderer::new(
-			device.wgpu_device(),
-			output_texture_format,
-			None,
-			1,
-		);
 
 		EguiContext {
 			output_texture,
-			renderer,
 			ctx: egui::Context::default(),
-			primitives: Vec::new(),
+			egui_output: default(),
+			clipped_primitives: Vec::new(),
 		}
 	};
 
@@ -95,78 +96,12 @@ fn update_egui_ui(
 	mut redraw: EventWriter<bevy::window::RequestRedraw>,
 ) {
 	for mut egui_ctx in q.iter_mut() {
-		let egui_output = egui_ctx.ctx.run(egui::RawInput::default(), |ctx| {
+		let mut egui_output = egui_ctx.ctx.run(egui::RawInput::default(), |ctx| {
 			egui::Window::new("my window").show(ctx, |ui| ui.label("foobar"));
 		});
-		// TODO: Handle textures to delete
-		for (tid, delta) in egui_output.textures_delta.set {
-			egui_ctx.renderer.update_texture(
-				device.wgpu_device(),
-				queue.as_ref(),
-				tid,
-				&delta,
-			);
-		}
-		egui_ctx.primitives = egui_ctx.ctx.tessellate(egui_output.shapes);
+		let shapes = std::mem::take(&mut egui_output.shapes);
+		egui_ctx.egui_output = egui_output;
+		egui_ctx.clipped_primitives = egui_ctx.ctx.tessellate(shapes);
 		redraw.send(bevy::window::RequestRedraw)
 	}
-}
-
-fn render_egui_wgpu() {
-
-	// let output_image = images
-	// 	.get(&egui_thing.output_texture)
-	// 	.expect("Should get output texture from handle");
-	// let screen_descriptor = egui_wgpu::renderer::ScreenDescriptor {
-	// 	pixels_per_point: 1.0,
-	// 	size_in_pixels: [
-	// 		output_image.texture_descriptor.size.width,
-	// 		output_image.texture_descriptor.size.height,
-	// 	],
-	// };
-	//
-	// let mut encoder =
-	// 	tuple
-	// 		.0
-	// 		.create_command_encoder(&wgpu::CommandEncoderDescriptor {
-	// 			label: Some("Egui Render Encoder"),
-	// 		});
-	// egui_thing.renderer.update_buffers(
-	// 	tuple.0.wgpu_device(),
-	// 	tuple.1.as_ref(),
-	// 	&mut encoder,
-	// 	&egui_primitives,
-	// 	&screen_descriptor,
-	// );
-	//
-	// let mut egui_render_pass =
-	// 	encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
-	// 		label: Some("Egui Render Pass"),
-	// 		color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-	// 			view: &output_gpu_image.texture_view,
-	// 			resolve_target: None,
-	// 			ops: wgpu::Operations {
-	// 				load: wgpu::LoadOp::Clear(wgpu::Color {
-	// 					r: 0.1,
-	// 					g: 0.2,
-	// 					b: 0.3,
-	// 					a: 1.0,
-	// 				}),
-	// 				store: true,
-	// 			},
-	// 		})],
-	// 		depth_stencil_attachment: None,
-	// 	});
-	//
-	// egui_thing.renderer.render(
-	// 	&mut egui_render_pass,
-	// 	&egui_primitives,
-	// 	&screen_descriptor,
-	// );
-	//
-	// drop(egui_render_pass);
-	// let commands = encoder.finish();
-	// tuple.1.submit([commands]);
-	// error!("After submit");
-	// // output.present();
 }
