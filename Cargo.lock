@@ -1168,22 +1168,7 @@ dependencies = [
 [[package]]
 name = "bevy_openxr"
 version = "0.1.0"
-source = "git+https://github.com/awtterpip/bevy_openxr?rev=4da61df#4da61df223a49a17d6d1fa5c1a52d9c797c95947"
-dependencies = [
- "anyhow",
- "ash",
- "bevy 0.12.0-dev",
- "mint",
- "openxr",
- "wgpu",
- "wgpu-core",
- "wgpu-hal",
-]
-
-[[package]]
-name = "bevy_openxr"
-version = "0.1.0"
-source = "git+https://github.com/awtterpip/bevy_openxr#4d36ddf9c4aca7fef8ec494bbf88874c605a0d92"
+source = "git+https://github.com/awtterpip/bevy_openxr#25dff12b9a70dd8b1d7978d08da8b7dcf4f3e136"
 dependencies = [
  "anyhow",
  "ash",
@@ -2094,15 +2079,6 @@ dependencies = [
  "glob",
  "libc",
  "libloading 0.7.4",
-]
-
-[[package]]
-name = "cmake"
-version = "0.1.50"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a31c789563b815f77f4250caee12365734369f942439b7defd71e18a48197130"
-dependencies = [
- "cc",
 ]
 
 [[package]]
@@ -3485,7 +3461,7 @@ name = "openxr-6dof"
 version = "0.0.0"
 dependencies = [
  "bevy 0.12.0-dev",
- "bevy_openxr 0.1.0 (git+https://github.com/awtterpip/bevy_openxr?rev=4da61df)",
+ "bevy_openxr",
  "color-eyre",
  "openxr",
 ]
@@ -3496,7 +3472,6 @@ version = "0.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fa8f022053ecd7989d86f867b4fb8c3520347612b9d637e217077a0d6b4a6634"
 dependencies = [
- "cmake",
  "jni 0.19.0",
  "libc",
  "mint",
@@ -4716,7 +4691,6 @@ version = "0.0.0"
 dependencies = [
  "bevy 0.12.0-dev",
  "bevy_mod_inverse_kinematics 0.4.0 (git+https://github.com/MalekiRe/bevy_mod_inverse_kinematics)",
- "bevy_openxr 0.1.0 (git+https://github.com/awtterpip/bevy_openxr)",
+ "bevy_openxr",
  "color-eyre",
- "openxr",
 ]

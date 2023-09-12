@@ -1,12 +1,14 @@
+use bevy::core_pipeline::clear_color::ClearColorConfig;
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::math::vec3;
 use bevy::prelude::*;
+use bevy::render::camera::RenderTarget;
+use bevy::render::render_resource::{Extent3d, TextureDescriptor, TextureDimension, TextureFormat, TextureUsages};
 use bevy::transform::components::Transform;
 use bevy_openxr::input::XrInput;
 use bevy_openxr::resources::XrFrameState;
-use bevy_openxr::xr_input::controllers::XrControllerType;
 use bevy_openxr::xr_input::oculus_touch::OculusController;
-use bevy_openxr::xr_input::{OpenXrInput, QuatConv, Vec3Conv};
+use bevy_openxr::xr_input::{QuatConv, Vec3Conv};
 use bevy_openxr::DefaultXrPlugins;
 
 const ASSET_FOLDER: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/../../assets/");
@@ -17,7 +19,6 @@ fn main() {
 	info!("Running `openxr-6dof` skill");
 	App::new()
 		.add_plugins(DefaultXrPlugins)
-		.add_plugins(OpenXrInput::new(XrControllerType::OculusTouch))
 		.add_plugins(LogDiagnosticsPlugin::default())
 		.add_plugins(FrameTimeDiagnosticsPlugin)
 		.add_plugins(bevy_mod_inverse_kinematics::InverseKinematicsPlugin)
@@ -33,9 +34,45 @@ pub struct AvatarSetup;
 fn setup(
 	mut commands: Commands,
 	mut meshes: ResMut<Assets<Mesh>>,
+	mut images: ResMut<Assets<Image>>,
 	assets: Res<AssetServer>,
 	mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
+	let size = Extent3d {
+		width: 512,
+		height: 512,
+		..default()
+	};
+	// This is the texture that will be rendered to.
+	let mut image = Image {
+		texture_descriptor: TextureDescriptor {
+			label: None,
+			size,
+			dimension: TextureDimension::D2,
+			format: TextureFormat::Bgra8UnormSrgb,
+			mip_level_count: 1,
+			sample_count: 1,
+			usage: TextureUsages::TEXTURE_BINDING
+				| TextureUsages::COPY_DST
+				| TextureUsages::RENDER_ATTACHMENT,
+			view_formats: &[],
+		},
+		..default()
+	};
+
+	// fill image.data with zeroes
+	image.resize(size);
+
+	let image_handle = images.add(image);
+
+	// This material has the texture that has been rendered.
+    let mirror_material_handle = materials.add(StandardMaterial {
+        base_color_texture: Some(image_handle.clone()),
+        reflectance: 0.02,
+        unlit: false,
+        ..default()
+    });
+
 	// plane
 	commands.spawn(PbrBundle {
 		mesh: meshes.add(shape::Plane::from_size(5.0).into()),
@@ -64,6 +101,31 @@ fn setup(
 		transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
 		..default()
 	},));
+	let mirror = commands.spawn(PbrBundle {
+		mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2 { x: 2.0, y: 2.0}, flip: true})),
+		material: mirror_material_handle,
+		..default()
+	}).id();
+	let camera = commands.spawn(
+        Camera3dBundle {
+            camera_3d: Camera3d {
+                clear_color: ClearColorConfig::Custom(Color::WHITE),
+                ..default()
+            },
+            camera: Camera {
+                // render before the "main pass" camera
+                order: -1,
+                target: RenderTarget::Image(image_handle.clone()),
+                ..default()
+            },
+			transform: Transform::from_xyz(0.0, 0.0, 0.0).with_rotation(Quat::from_euler(EulerRot::XYZ, 0.0, 180.0_f32.to_radians(), 0.0)),
+            ..default()
+        }
+    ).id();
+	commands.spawn(SpatialBundle {
+		transform: Transform::from_xyz(0.0, 1.0, -2.0),
+		..default()
+	}).push_children(&[camera, mirror]);
 	commands.spawn((
 		SceneBundle {
 			scene: assets.load(&(ASSET_FOLDER.to_string() + "/malek.gltf#Scene0")),
