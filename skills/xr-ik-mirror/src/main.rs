@@ -2,11 +2,13 @@ use bevy::core_pipeline::clear_color::ClearColorConfig;
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::math::vec3;
 use bevy::prelude::*;
+use bevy::prelude::EulerRot::XYZ;
 use bevy::render::camera::RenderTarget;
 use bevy::render::render_resource::{
 	Extent3d, TextureDescriptor, TextureDimension, TextureFormat, TextureUsages,
 };
 use bevy::transform::components::Transform;
+use bevy_mod_inverse_kinematics::IkConstraint;
 use bevy_openxr::input::XrInput;
 use bevy_openxr::resources::XrFrameState;
 use bevy_openxr::xr_input::oculus_touch::OculusController;
@@ -25,7 +27,7 @@ fn main() {
 		.add_plugins(FrameTimeDiagnosticsPlugin)
 		.add_plugins(bevy_mod_inverse_kinematics::InverseKinematicsPlugin)
 		.add_systems(Startup, setup)
-		.add_systems(Update, (hands, setup_ik, head_sync, body_sync))
+		.add_systems(Update, (hands, setup_ik, head_sync, body_sync, true_head_sync))
 		.run();
 }
 
@@ -40,6 +42,17 @@ fn setup(
 	assets: Res<AssetServer>,
 	mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
+
+	let bevy_mirror_dwelling_img: Handle<Image> = assets.load(&(ASSET_FOLDER.to_string() + "bevy_mirror_dwelling.png"));
+	commands.spawn(PbrBundle {
+		mesh: meshes.add(shape::Cube::default().into()),
+		material: materials.add(StandardMaterial {
+			base_color_texture: Some(bevy_mirror_dwelling_img),
+			..default()
+		}),
+		transform: Transform::from_xyz(0.0,2.2, -2.0).with_scale(Vec3::new(2.0, 0.5, 0.01)).with_rotation(Quat::from_euler(XYZ, 180.0_f32.to_radians(), 0.0, 180.0_f32.to_radians())),
+		..default()
+	});
 	let size = Extent3d {
 		width: 512,
 		height: 512,
@@ -143,7 +156,7 @@ fn setup(
 		SceneBundle {
 			scene: assets.load(&(ASSET_FOLDER.to_string() + "/malek.gltf#Scene0")),
 			transform: Transform::from_xyz(0.0, 0.0, 0.0).with_rotation(
-				Quat::from_euler(EulerRot::XYZ, 0.0, 180.0_f32.to_radians(), 0.0),
+				Quat::from_euler(EulerRot::XYZ, 0.0, 0.0_f32.to_radians(), 0.0),
 			),
 			..default()
 		},
@@ -164,6 +177,28 @@ pub struct Head;
 pub struct Avatar;
 #[derive(Component)]
 pub struct Hips;
+
+#[derive(Component)]
+pub struct TrueHead;
+
+
+fn true_head_sync(
+	mut head_query: Query<(&mut Transform, &TrueHead)>,
+	frame_state: Res<XrFrameState>,
+	xr_input: Res<XrInput>,
+) {
+	let mut func = || -> color_eyre::Result<()> {
+		let frame_state = *frame_state.lock().unwrap();
+		let a = xr_input
+			.head
+			.relate(&xr_input.stage, frame_state.predicted_display_time)?;
+		for (mut head, _) in head_query.iter_mut() {
+			head.rotation = a.0.pose.orientation.to_quat();
+		}
+		Ok(())
+	};
+	let _ = func();
+}
 
 fn head_sync(
 	mut head_query: Query<(&mut Transform, &Head)>,
@@ -251,14 +286,14 @@ fn hands(
 						translation: left_controller.0.pose.position.to_vec3(),
 						rotation: left_controller.0.pose.orientation.to_quat(),
 						scale: Default::default(),
-					}
+					};
 				}
 				Hand::Right => {
 					*transform = Transform {
 						translation: right_controller.0.pose.position.to_vec3(),
 						rotation: right_controller.0.pose.orientation.to_quat(),
 						scale: Default::default(),
-					}
+					};
 				}
 			}
 		}
@@ -318,21 +353,8 @@ fn setup_ik(
 		};
 		commands.entity(entity).remove::<AvatarSetup>();
 
-		let pole_target = commands
-			.spawn(PbrBundle {
-				transform: Transform::from_xyz(-1.0, 0.4, -0.2),
-				mesh: meshes.add(Mesh::from(shape::UVSphere {
-					radius: 0.05,
-					sectors: 7,
-					stacks: 7,
-				})),
-				material: materials.add(StandardMaterial {
-					base_color: Color::GREEN,
-					..default()
-				}),
-				..default()
-			})
-			.id();
+		commands.entity(hips).insert(Hips);
+		commands.entity(head).insert(TrueHead);
 		let target_entity1 = commands
 			.spawn((TransformBundle::default(), Hand::Right))
 			.id();
@@ -348,8 +370,8 @@ fn setup_ik(
 				chain_length: 3,
 				iterations: 20,
 				target: target_entity1,
-				pole_target: Some(pole_target),
-				pole_angle: -std::f32::consts::FRAC_PI_2,
+				pole_target: None,
+				pole_angle: std::f32::consts::FRAC_PI_4,
 				enabled: true,
 			});
 		commands
@@ -358,8 +380,8 @@ fn setup_ik(
 				chain_length: 3,
 				iterations: 20,
 				target: target_entity2,
-				pole_target: Some(pole_target),
-				pole_angle: -std::f32::consts::FRAC_PI_2,
+				pole_target: None,
+				pole_angle: -std::f32::consts::FRAC_PI_4,
 				enabled: true,
 			});
 		commands
@@ -368,19 +390,19 @@ fn setup_ik(
 				chain_length: 1,
 				iterations: 20,
 				target: target_entity3,
-				pole_target: Some(pole_target),
-				pole_angle: -std::f32::consts::FRAC_PI_2,
+				pole_target: None,
+				pole_angle: 180_f32.to_radians(),
 				enabled: true,
 			});
-		commands
-			.entity(hips)
-			.insert(bevy_mod_inverse_kinematics::IkConstraint {
-				chain_length: 1,
-				iterations: 20,
-				target: hips_entity,
-				pole_target: Some(pole_target),
-				pole_angle: -std::f32::consts::FRAC_PI_2,
-				enabled: true,
-			});
+		// commands
+		// 	.entity(hips)
+		// 	.insert(bevy_mod_inverse_kinematics::IkConstraint {
+		// 		chain_length: 2,
+		// 		iterations: 20,
+		// 		target: hips_entity,
+		// 		pole_target: None,
+		// 		pole_angle: 180_f32.to_radians(),
+		// 		enabled: true,
+		// 	});
 	}
 }

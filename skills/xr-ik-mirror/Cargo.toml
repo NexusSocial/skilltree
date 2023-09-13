@@ -10,6 +10,6 @@ rust-version.workspace = true
 
 [dependencies]
 bevy = { git = "https://github.com/awtterpip/bevy" }
-bevy_openxr = { git = "https://github.com/awtterpip/bevy_openxr" }
+bevy_openxr = { git = "https://github.com/awtterpip/bevy_openxr", features = ["linked"] }
 color-eyre.workspace = true
 bevy_mod_inverse_kinematics = { git = "https://github.com/MalekiRe/bevy_mod_inverse_kinematics"}
