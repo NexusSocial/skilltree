@@ -1,8 +1,8 @@
 use bevy::core_pipeline::clear_color::ClearColorConfig;
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::math::vec3;
-use bevy::prelude::*;
 use bevy::prelude::EulerRot::XYZ;
+use bevy::prelude::*;
 use bevy::render::camera::RenderTarget;
 use bevy::render::render_resource::{
 	Extent3d, TextureDescriptor, TextureDimension, TextureFormat, TextureUsages,
@@ -27,7 +27,10 @@ fn main() {
 		.add_plugins(FrameTimeDiagnosticsPlugin)
 		.add_plugins(bevy_mod_inverse_kinematics::InverseKinematicsPlugin)
 		.add_systems(Startup, setup)
-		.add_systems(Update, (hands, setup_ik, head_sync, body_sync, true_head_sync))
+		.add_systems(
+			Update,
+			(hands, setup_ik, head_sync, body_sync, true_head_sync),
+		)
 		.run();
 }
 
@@ -42,15 +45,22 @@ fn setup(
 	assets: Res<AssetServer>,
 	mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-
-	let bevy_mirror_dwelling_img: Handle<Image> = assets.load(&(ASSET_FOLDER.to_string() + "bevy_mirror_dwelling.png"));
+	let bevy_mirror_dwelling_img: Handle<Image> =
+		assets.load(&(ASSET_FOLDER.to_string() + "bevy_mirror_dwelling.png"));
 	commands.spawn(PbrBundle {
 		mesh: meshes.add(shape::Cube::default().into()),
 		material: materials.add(StandardMaterial {
 			base_color_texture: Some(bevy_mirror_dwelling_img),
 			..default()
 		}),
-		transform: Transform::from_xyz(0.0,2.2, -2.0).with_scale(Vec3::new(2.0, 0.5, 0.01)).with_rotation(Quat::from_euler(XYZ, 180.0_f32.to_radians(), 0.0, 180.0_f32.to_radians())),
+		transform: Transform::from_xyz(0.0, 2.2, -2.0)
+			.with_scale(Vec3::new(2.0, 0.5, 0.01))
+			.with_rotation(Quat::from_euler(
+				XYZ,
+				180.0_f32.to_radians(),
+				0.0,
+				180.0_f32.to_radians(),
+			)),
 		..default()
 	});
 	let size = Extent3d {
@@ -180,7 +190,6 @@ pub struct Hips;
 
 #[derive(Component)]
 pub struct TrueHead;
-
 
 fn true_head_sync(
 	mut head_query: Query<(&mut Transform, &TrueHead)>,
