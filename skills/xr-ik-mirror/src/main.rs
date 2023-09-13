@@ -8,7 +8,7 @@ use bevy::render::render_resource::{
 	Extent3d, TextureDescriptor, TextureDimension, TextureFormat, TextureUsages,
 };
 use bevy::transform::components::Transform;
-use bevy_mod_inverse_kinematics::IkConstraint;
+
 use bevy_openxr::input::XrInput;
 use bevy_openxr::resources::XrFrameState;
 use bevy_openxr::xr_input::oculus_touch::OculusController;
@@ -314,8 +314,8 @@ fn hands(
 
 fn setup_ik(
 	mut commands: Commands,
-	mut meshes: ResMut<Assets<Mesh>>,
-	mut materials: ResMut<Assets<StandardMaterial>>,
+	_meshes: ResMut<Assets<Mesh>>,
+	_materials: ResMut<Assets<StandardMaterial>>,
 	added_query: Query<(Entity, &AvatarSetup)>,
 	children: Query<&Children>,
 	names: Query<&Name>,
@@ -371,7 +371,7 @@ fn setup_ik(
 			.spawn((TransformBundle::default(), Hand::Left))
 			.id();
 		let target_entity3 = commands.spawn((TransformBundle::default(), Head)).id();
-		let hips_entity = commands.spawn((TransformBundle::default(), Hips)).id();
+		let _hips_entity = commands.spawn((TransformBundle::default(), Hips)).id();
 		// Add an IK constraint to the right hand, using the targets that were created earlier.
 		commands
 			.entity(left_hand)
