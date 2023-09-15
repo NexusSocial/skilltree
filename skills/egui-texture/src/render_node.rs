@@ -6,7 +6,7 @@ use crate::EguiContext;
 
 pub struct EguiNode {
 	pub output_image: Handle<Image>,
-	pub entity: Entity,
+	pub egui_ctx: EguiContext,
 	pub renderer: Mutex<egui_wgpu::Renderer>,
 }
 
@@ -38,13 +38,9 @@ impl bevy::render::render_graph::Node for EguiNode {
 			],
 		};
 
-		let egui_ctx = world
-			.get::<EguiContext>(self.entity)
-			.expect("The entity should be valid");
-
 		let mut renderer = self.renderer.lock().unwrap();
 		// TODO: Handle textures to delete
-		for (tid, delta) in egui_ctx.egui_output.textures_delta.set.iter() {
+		for (tid, delta) in self.egui_ctx.egui_output.textures_delta.set.iter() {
 			renderer.update_texture(device, queue, *tid, delta);
 		}
 
@@ -52,7 +48,7 @@ impl bevy::render::render_graph::Node for EguiNode {
 			device,
 			queue,
 			encoder,
-			&egui_ctx.clipped_primitives,
+			&self.egui_ctx.clipped_primitives,
 			&screen_descriptor,
 		);
 
@@ -77,7 +73,7 @@ impl bevy::render::render_graph::Node for EguiNode {
 
 		renderer.render(
 			&mut egui_render_pass,
-			&egui_ctx.clipped_primitives,
+			&self.egui_ctx.clipped_primitives,
 			&screen_descriptor,
 		);
 		//

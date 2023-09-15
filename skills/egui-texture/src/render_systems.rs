@@ -9,6 +9,7 @@ pub fn add_render_node(
 	textures: Extract<Res<Assets<Image>>>,
 	mut render_graph: ResMut<RenderGraph>,
 	device: Res<bevy::render::renderer::RenderDevice>,
+	mut commands: Commands,
 ) {
 	error!("add_render_node");
 	for (entity, egui_ctx) in q.iter() {
@@ -26,7 +27,7 @@ pub fn add_render_node(
 		let new_node = EguiNode {
 			output_image: Handle::clone(&egui_ctx.output_texture),
 			renderer: renderer.into(),
-			entity,
+			egui_ctx: egui_ctx.clone(),
 		};
 		let node_label = "egui-texture";
 		render_graph.add_node(node_label, new_node);

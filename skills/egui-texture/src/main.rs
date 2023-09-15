@@ -2,16 +2,9 @@ mod render_node;
 mod render_systems;
 
 use bevy::prelude::*;
-use bevy::render::render_asset::RenderAsset;
-use bevy::render::render_asset::RenderAssets;
-use bevy::render::renderer::RenderDevice;
-use bevy::render::renderer::RenderQueue;
-use bevy::render::texture::DefaultImageSampler;
-use bevy::render::texture::GpuImage;
 use bevy_egui::egui;
 use bevy_egui::EguiContexts;
 use color_eyre::Result;
-use wgpu::util::RenderEncoder;
 
 fn main() -> Result<()> {
 	color_eyre::install()?;
@@ -36,7 +29,7 @@ fn main() -> Result<()> {
 	Ok(())
 }
 
-#[derive(Component)]
+#[derive(Component, Clone)]
 pub struct EguiContext {
 	output_texture: Handle<Image>,
 	ctx: egui::Context,
@@ -51,10 +44,12 @@ fn setup(
 	mut images: ResMut<Assets<Image>>,
 ) {
 	let egui_thing = {
-		let output_texture = Image {
+		let mut output_texture = Image {
 			data: vec![255; 512 * 512 * 4],
 			..default()
 		};
+		output_texture.texture_descriptor.usage |=
+			wgpu::TextureUsages::RENDER_ATTACHMENT;
 		let output_texture = images.add(output_texture);
 
 		EguiContext {
