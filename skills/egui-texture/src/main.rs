@@ -49,7 +49,6 @@ fn setup(
 	mut meshes: ResMut<Assets<Mesh>>,
 	mut materials: ResMut<Assets<StandardMaterial>>,
 	mut images: ResMut<Assets<Image>>,
-	device: Res<RenderDevice>,
 ) {
 	let egui_thing = {
 		let output_texture = Image {
@@ -90,8 +89,6 @@ fn ui_example_system(mut contexts: EguiContexts) {
 ///
 /// Still need to actually perform the render encoder commands
 fn update_egui_ui(
-	device: Res<RenderDevice>,
-	queue: Res<RenderQueue>,
 	mut q: Query<&mut EguiContext>,
 	mut redraw: EventWriter<bevy::window::RequestRedraw>,
 ) {

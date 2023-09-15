@@ -6,9 +6,9 @@ use crate::EguiContext;
 
 pub fn add_render_node(
 	q: Extract<Query<(Entity, &EguiContext)>>,
+	textures: Extract<Res<Assets<Image>>>,
 	mut render_graph: ResMut<RenderGraph>,
 	device: Res<bevy::render::renderer::RenderDevice>,
-	textures: Res<Assets<Image>>,
 ) {
 	error!("add_render_node");
 	for (entity, egui_ctx) in q.iter() {
