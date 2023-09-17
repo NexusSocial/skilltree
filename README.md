@@ -102,6 +102,10 @@ the skills/demos that interest you for instructions on how to run them.
 - `direnv allow`
 - `git lfs install && git lfs pull`
 
+## Contributions
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## License
 
 Unless otherwise specified, all code in this repository is dual-licensed under
