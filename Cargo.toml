@@ -2,7 +2,7 @@
 resolver = "2"
 members = [
 	"skills/cube",
-	"skills/egui-texture",
+	"skills/worldspace-ui",
 	"skills/ik",
 	"skills/manipulation-flatscreen",
 	"skills/openxr-6dof",
