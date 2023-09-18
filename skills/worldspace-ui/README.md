@@ -7,3 +7,5 @@ To run the code:
 ```bash
 cargo run -p worldspace-ui
 ```
+
+![Screenshot](screenshot.png)
