@@ -67,6 +67,8 @@ fn setup(
 			material: materials.add(StandardMaterial {
 				base_color: Color::WHITE,
 				base_color_texture: Some(Handle::clone(&egui_thing.output_texture)),
+				// Remove this if you want it to use the world's lighting.
+				unlit: true,
 				..default()
 			}),
 			..default()
