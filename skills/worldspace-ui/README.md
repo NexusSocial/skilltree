@@ -1,8 +1,9 @@
-# `cube`
+# `worldspace-ui`
 
-A single rotating 3d textured cube. Basically a hello world for bevy.
+A cube that renders an [egui](https://www.egui.rs/#demo) application to a texture,
+and applies it to a cube.
 
 To run the code:
 ```bash
-cargo run -p cube
+cargo run -p worldspace-ui
 ```
