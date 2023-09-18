@@ -17,8 +17,7 @@ fn main() -> Result<()> {
 			brightness: 1.,
 		})
 		.add_systems(Startup, setup)
-		.add_systems(Update, ui_example_system);
-	// .add_systems(Update, update_egui_ui);
+		.add_systems(Update, screenspace_ui);
 
 	let Ok(render_app) = app.get_sub_app_mut(bevy::render::RenderApp) else {
 		panic!("The render plugin should have added this subapp");
@@ -42,12 +41,18 @@ fn setup(
 	mut images: ResMut<Assets<Image>>,
 ) {
 	let egui_thing = {
+		let size = wgpu::Extent3d {
+			width: 256,
+			height: 256,
+			depth_or_array_layers: 1,
+		};
 		let mut output_texture = Image {
-			data: vec![255; 512 * 512 * 4],
+			data: vec![255; (size.width * size.height * 4) as usize],
 			..default()
 		};
 		output_texture.texture_descriptor.usage |=
 			wgpu::TextureUsages::RENDER_ATTACHMENT;
+		output_texture.texture_descriptor.size = size;
 		let output_texture = images.add(output_texture);
 
 		EguiContext {
@@ -70,26 +75,8 @@ fn setup(
 	));
 }
 
-fn ui_example_system(mut contexts: EguiContexts) {
-	egui::Window::new("Regular 2D screenspace window").show(contexts.ctx_mut(), |ui| {
-		ui.label("I am in screenspace!");
+fn screenspace_ui(mut contexts: EguiContexts) {
+	egui::Window::new("Screenspace Window").show(contexts.ctx_mut(), |ui| {
+		ui.label("I am rendering to the screen!");
 	});
 }
-
-// /// Performs the egui ui draw, updates textures, and generates the primitives.
-// ///
-// /// Still need to actually perform the render encoder commands
-// fn update_egui_ui(
-// 	mut q: Query<&mut EguiContext>,
-// 	mut redraw: EventWriter<bevy::window::RequestRedraw>,
-// ) {
-// 	for mut egui_ctx in q.iter_mut() {
-// 		let mut egui_output = egui_ctx.ctx.run(egui::RawInput::default(), |ctx| {
-// 			egui::Window::new("my window").show(ctx, |ui| ui.label("foobar"));
-// 		});
-// 		let shapes = std::mem::take(&mut egui_output.shapes);
-// 		egui_ctx.egui_output = egui_output;
-// 		egui_ctx.clipped_primitives = egui_ctx.ctx.tessellate(shapes);
-// 		redraw.send(bevy::window::RequestRedraw)
-// 	}
-// }

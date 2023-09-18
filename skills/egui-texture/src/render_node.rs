@@ -41,7 +41,8 @@ impl bevy::render::render_graph::Node for EguiNode {
 
 		// TODO: Eventually I'll move this to a separate user defined system.
 		let egui_output = self.egui_ctx.ctx.run(egui::RawInput::default(), |ctx| {
-			egui::Window::new("my window").show(ctx, |ui| ui.label("foobar"));
+			egui::Window::new("Worldspace Window")
+				.show(ctx, |ui| ui.label("I am rendering to a texture on a cube"));
 		});
 		// TODO: Handle textures to delete
 		for (tid, delta) in egui_output.textures_delta.set.iter() {
@@ -81,11 +82,7 @@ impl bevy::render::render_graph::Node for EguiNode {
 			&clipped_primitives,
 			&screen_descriptor,
 		);
-		// drop(egui_render_pass);
-		// let commands = encoder.finish();
-		// queue.submit([commands]);
-		// error!("After submit");
-		// // output.present();
+
 		Ok(())
 	}
 }
