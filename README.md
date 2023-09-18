@@ -37,7 +37,7 @@ Feel free to add to the following lists:
 - ✅ [Single textured 3d cube](skills/cube)
 - 📋 Flycam camera controller
 - 📋 First person camera controller (for desktop users)
-- ✅ [World-space UI](skills/worldspace-ui)(with egui)
+- ✅ [World-space UI](skills/worldspace-ui) (with egui)
 - 📋 Entity inspector (`bevy_inspector_egui`)
 - 📋 Custom vertex and fragment shader in WGSL + bevy
 - ✅ [Render a GLTF/VRM model (standard shader)](skills/ik)
