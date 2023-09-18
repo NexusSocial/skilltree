@@ -17,8 +17,8 @@ fn main() -> Result<()> {
 			brightness: 1.,
 		})
 		.add_systems(Startup, setup)
-		.add_systems(Update, ui_example_system)
-		.add_systems(Update, update_egui_ui);
+		.add_systems(Update, ui_example_system);
+	// .add_systems(Update, update_egui_ui);
 
 	let Ok(render_app) = app.get_sub_app_mut(bevy::render::RenderApp) else {
 		panic!("The render plugin should have added this subapp");
@@ -33,8 +33,6 @@ fn main() -> Result<()> {
 pub struct EguiContext {
 	output_texture: Handle<Image>,
 	ctx: egui::Context,
-	egui_output: egui::FullOutput,
-	clipped_primitives: Vec<egui::ClippedPrimitive>,
 }
 
 fn setup(
@@ -55,8 +53,6 @@ fn setup(
 		EguiContext {
 			output_texture,
 			ctx: egui::Context::default(),
-			egui_output: default(),
-			clipped_primitives: Vec::new(),
 		}
 	};
 
@@ -80,20 +76,20 @@ fn ui_example_system(mut contexts: EguiContexts) {
 	});
 }
 
-/// Performs the egui ui draw, updates textures, and generates the primitives.
-///
-/// Still need to actually perform the render encoder commands
-fn update_egui_ui(
-	mut q: Query<&mut EguiContext>,
-	mut redraw: EventWriter<bevy::window::RequestRedraw>,
-) {
-	for mut egui_ctx in q.iter_mut() {
-		let mut egui_output = egui_ctx.ctx.run(egui::RawInput::default(), |ctx| {
-			egui::Window::new("my window").show(ctx, |ui| ui.label("foobar"));
-		});
-		let shapes = std::mem::take(&mut egui_output.shapes);
-		egui_ctx.egui_output = egui_output;
-		egui_ctx.clipped_primitives = egui_ctx.ctx.tessellate(shapes);
-		redraw.send(bevy::window::RequestRedraw)
-	}
-}
+// /// Performs the egui ui draw, updates textures, and generates the primitives.
+// ///
+// /// Still need to actually perform the render encoder commands
+// fn update_egui_ui(
+// 	mut q: Query<&mut EguiContext>,
+// 	mut redraw: EventWriter<bevy::window::RequestRedraw>,
+// ) {
+// 	for mut egui_ctx in q.iter_mut() {
+// 		let mut egui_output = egui_ctx.ctx.run(egui::RawInput::default(), |ctx| {
+// 			egui::Window::new("my window").show(ctx, |ui| ui.label("foobar"));
+// 		});
+// 		let shapes = std::mem::take(&mut egui_output.shapes);
+// 		egui_ctx.egui_output = egui_output;
+// 		egui_ctx.clipped_primitives = egui_ctx.ctx.tessellate(shapes);
+// 		redraw.send(bevy::window::RequestRedraw)
+// 	}
+// }

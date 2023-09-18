@@ -5,14 +5,14 @@ use crate::render_node::EguiNode;
 use crate::EguiContext;
 
 pub fn add_render_node(
-	q: Extract<Query<(Entity, &EguiContext)>>,
+	q: Extract<Query<(Entity, &EguiContext), Added<EguiContext>>>,
+	// q: Extract<Query<&EguiContext>>,
 	textures: Extract<Res<Assets<Image>>>,
 	mut render_graph: ResMut<RenderGraph>,
 	device: Res<bevy::render::renderer::RenderDevice>,
-	mut commands: Commands,
 ) {
-	error!("add_render_node");
 	for (entity, egui_ctx) in q.iter() {
+		info!("adding render node for {entity:?}");
 		let output_texture_format = textures
 			.get(&egui_ctx.output_texture)
 			.expect("Should have found the matching `Image`")

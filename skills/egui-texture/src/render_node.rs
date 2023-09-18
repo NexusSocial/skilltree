@@ -1,6 +1,5 @@
-use std::sync::Mutex;
-
 use bevy::{prelude::*, render::render_asset::RenderAssets};
+use std::sync::Mutex;
 
 use crate::EguiContext;
 
@@ -39,16 +38,22 @@ impl bevy::render::render_graph::Node for EguiNode {
 		};
 
 		let mut renderer = self.renderer.lock().unwrap();
+
+		// TODO: Eventually I'll move this to a separate user defined system.
+		let egui_output = self.egui_ctx.ctx.run(egui::RawInput::default(), |ctx| {
+			egui::Window::new("my window").show(ctx, |ui| ui.label("foobar"));
+		});
 		// TODO: Handle textures to delete
-		for (tid, delta) in self.egui_ctx.egui_output.textures_delta.set.iter() {
+		for (tid, delta) in egui_output.textures_delta.set.iter() {
 			renderer.update_texture(device, queue, *tid, delta);
 		}
+		let clipped_primitives = self.egui_ctx.ctx.tessellate(egui_output.shapes);
 
 		renderer.update_buffers(
 			device,
 			queue,
 			encoder,
-			&self.egui_ctx.clipped_primitives,
+			&clipped_primitives,
 			&screen_descriptor,
 		);
 
@@ -73,16 +78,14 @@ impl bevy::render::render_graph::Node for EguiNode {
 
 		renderer.render(
 			&mut egui_render_pass,
-			&self.egui_ctx.clipped_primitives,
+			&clipped_primitives,
 			&screen_descriptor,
 		);
-		//
 		// drop(egui_render_pass);
 		// let commands = encoder.finish();
-		// tuple.1.submit([commands]);
+		// queue.submit([commands]);
 		// error!("After submit");
 		// // output.present();
-		// todo!()
 		Ok(())
 	}
 }
