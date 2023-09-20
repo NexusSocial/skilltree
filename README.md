@@ -70,9 +70,6 @@ Feel free to add to the following lists:
 - ✅ [OpenXR 6dof headset and controller tracking](skills/openxr-6dof)
 - 📋 OpenXR Vive trackers (`XR_HTCX_vive_tracker_interaction`)
 
-Note: The OpenXR stuff should be unblocked soon, there are community
-crates being developed to add openxr to bevy right now. See also
-
 ### Demo List
 
 - 📋 Comparison of different bevy networking libraries for shared state
