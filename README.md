@@ -41,8 +41,8 @@ The skills in this section are general and often can be accomplished by piecing 
 plugins/example code on the internet.
 
 - 🫵 📋 Flycam camera controller
+- 🫵 📋 Entity inspector (`bevy_inspector_egui`)
 - 🫵 ✅ [Single textured 3d cube](skills/cube)
-- 📋 Entity inspector (`bevy_inspector_egui`)
 - ✅ [Import a GLTF/VRM model (standard shader)](skills/ik)
 - ✅ [Animate a skinned mesh with IK and FK](skills/ik)
 - 📋 First person camera controller (for desktop users)
