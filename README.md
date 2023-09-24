@@ -52,12 +52,12 @@ plugins/example code on the internet.
 #### UI/UX Design
 The skills in this section are related to playing with UI/UX designs. VR is typically not required for working on these.
 
+- 🫵 📋 Laser pointer visuals (you can work on this without VR)
+- 🫵 📋 World-space gizmos for resizing, rotating, and moving objects and viewing bounding box 
 - 📋 Friends list menu
 - 📋 Avatar list menu
 - 📋 Active game worlds
 - 📋 Invite notification and Invite accept
-- 🫵 📋 Laser pointer visuals (you can work on this without VR)
-- 🫵 📋 World-space gizmos for resizing, rotating, and moving objects and viewing bounding box 
 - ✅ [Rotating and resize flatscreen](skills/flatscreen-manipulation)
 - 🥺 📋 Input scheme useful for social VR games that abstracts over mouse & keyboard, gamepad, VR Controllers,
   and hand tracking (likely a superset of `bevy_mod_picking`).
@@ -75,21 +75,21 @@ need VR to work on these
 The skills in this section are all related to 3D rendering and go a bit deeper than just
 using an existing plugin. VR is not necessary.
 
-- 🥺 🚧 [World-space UI](skills/worldspace-ui) (with egui)
 - 🫵 📋 Custom vertex and fragment shader in WGSL + bevy
-- 🥺 🚧 [Mirror](skills/xr-ik-mirror)
-- 🥺 📋 Plugin for MToon shaders implemented in WGSL + bevy
 - 📋 Dynamic foveated rendering
 - 📋 Dynamic scaling of resolution
+- 🥺 🚧 [World-space UI](skills/worldspace-ui) (with egui)
+- 🥺 🚧 [Mirror](skills/xr-ik-mirror)
+- 🥺 📋 Plugin for MToon shaders implemented in WGSL + bevy
 
 
 #### Math, Physics, Animation
 The skills in this section are all focused on math heavy parts of 3D game engines. VR is not necessary.
 
+- 🫵 📋 Non-deformable collision physics
 - 🚧 [VR Inverse Kinematics](skills/xr-ik-mirror)
 - 📋 Jiggle physics/Dynamic bones
 - 📋 Animate blendshapes/morph targets on a skinned mesh
-- 🫵 📋 Non-deformable collision physics
 - 🥺 ❌ Cloth or hair physics (blocked on a physics engine that does this)
 
 #### Audio
