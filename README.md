@@ -53,7 +53,7 @@ plugins/example code on the internet.
 The skills in this section are related to playing with UI/UX designs. VR is typically not required for working on these.
 
 - 🫵 📋 Laser pointer visuals (you can work on this without VR)
-- 🫵 📋 World-space gizmos for resizing, rotating, and moving objects and viewing bounding box 
+- 🫵 🚧 World-space gizmos for resizing, rotating, and moving objects and viewing bounding box 
 - 📋 Friends list menu
 - 📋 Avatar list menu
 - 📋 Active game worlds
