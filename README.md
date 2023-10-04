@@ -58,7 +58,7 @@ The skills in this section are related to playing with UI/UX designs. VR is typi
 - 📋 Avatar list menu
 - 📋 Active game worlds
 - 📋 Invite notification and Invite accept
-- ✅ [Rotating and resize flatscreen](skills/flatscreen-manipulation)
+- ✅ [Rotating and resize flatscreen](skills/manipulation-flatscreen)
 - 🥺 📋 Input scheme useful for social VR games that abstracts over mouse & keyboard, gamepad, VR Controllers,
   and hand tracking (likely a superset of `bevy_mod_picking`).
 
