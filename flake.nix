@@ -46,6 +46,7 @@
             pkgs.cargo-deny
             pkgs.cargo-expand
             pkgs.cargo-binutils
+			pkgs.cargo-apk
             # cmake for openxr
             pkgs.cmake
           ];
