@@ -15,7 +15,7 @@ version = "0.0.0"
 license = "MIT OR BSD-2-Clause-Patent"
 repository = "https://github.com/NexusSocial/skilltree"
 edition = "2021"
-rust-version = "1.72.0"
+rust-version = "1.73.0"
 
 [workspace.dependencies]
 bevy = "0.11.2"

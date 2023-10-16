@@ -16,12 +16,18 @@
     # See https://github.com/numtide/flake-utils#eachdefaultsystem--system---attrs
     utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          system = "${system}";
+          config = {
+            android_sdk.accept_license = true;
+            allowUnfree = true;
+          };
+        };
         # Brings in the rust toolchain from the standard file
         # that rustup/cargo uses.
         rustToolchain = fenix.packages.${system}.fromToolchainFile {
           file = ./rust-toolchain.toml;
-          sha256 = "sha256-Q9UgzzvxLi4x9aWUJTn+/5EXekC98ODRU1TwhUs9RnY=";
+          sha256 = "sha256-rLP8+fTxnPHoR96ZJiCa/5Ans1OojI7MLsmSqR2ip8o=";
         };
         rustPlatform = pkgs.makeRustPlatform {
           inherit (rustToolchain) cargo rustc;
@@ -34,11 +40,13 @@
           nativeBuildInputs = [
             rustToolchain
             pkgs.pkg-config
+            pkgs.androidenv.androidPkgs_9_0.androidsdk
 
             # Common cargo tools we often use
             pkgs.cargo-deny
             pkgs.cargo-expand
             pkgs.cargo-binutils
+			pkgs.cargo-apk
             # cmake for openxr
             pkgs.cmake
           ];
