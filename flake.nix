@@ -17,11 +17,11 @@
     utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
-			system = "${system}";
-			config = {
-			  android_sdk.accept_license = true;
-			};
-		};
+          system = "${system}";
+          config = {
+            android_sdk.accept_license = true;
+          };
+        };
         # Brings in the rust toolchain from the standard file
         # that rustup/cargo uses.
         rustToolchain = fenix.packages.${system}.fromToolchainFile {
