@@ -16,7 +16,12 @@
     # See https://github.com/numtide/flake-utils#eachdefaultsystem--system---attrs
     utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+			system = "${system}";
+			config = {
+			  android_sdk.accept_license = true;
+			};
+		};
         # Brings in the rust toolchain from the standard file
         # that rustup/cargo uses.
         rustToolchain = fenix.packages.${system}.fromToolchainFile {
@@ -34,6 +39,7 @@
           nativeBuildInputs = [
             rustToolchain
             pkgs.pkg-config
+            pkgs.androidenv.androidPkgs_9_0.androidsdk
 
             # Common cargo tools we often use
             pkgs.cargo-deny
