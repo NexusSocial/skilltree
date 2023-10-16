@@ -20,6 +20,7 @@
           system = "${system}";
           config = {
             android_sdk.accept_license = true;
+            allowUnfree = true;
           };
         };
         # Brings in the rust toolchain from the standard file
