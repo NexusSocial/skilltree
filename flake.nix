@@ -26,7 +26,7 @@
         # that rustup/cargo uses.
         rustToolchain = fenix.packages.${system}.fromToolchainFile {
           file = ./rust-toolchain.toml;
-          sha256 = "sha256-Q9UgzzvxLi4x9aWUJTn+/5EXekC98ODRU1TwhUs9RnY=";
+          sha256 = "sha256-rLP8+fTxnPHoR96ZJiCa/5Ans1OojI7MLsmSqR2ip8o=";
         };
         rustPlatform = pkgs.makeRustPlatform {
           inherit (rustToolchain) cargo rustc;
