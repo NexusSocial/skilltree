@@ -1,5 +1,5 @@
 [toolchain]
-channel = "1.72.0" # See workspace Cargo.toml
+channel = "1.73.0" # See workspace Cargo.toml
 components = ["rust-src", "rust-analyzer"]
 profile = "default"
 targets = ["x86_64-unknown-linux-gnu", "x86_64-pc-windows-msvc", "aarch64-linux-android"]
