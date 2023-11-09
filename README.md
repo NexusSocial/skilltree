@@ -115,16 +115,6 @@ the skills/demos that interest you for instructions on how to run them.
 - Install [bevy's dependencies](https://bevyengine.org/learn/book/getting-started/setup/#install-os-dependencies)
 - Install [git lfs](https://git-lfs.com/) and run `git lfs install && git lfs pull`
 
-### Option 2 (Linux and Mac only!): Nix package manager 
-
-- Have the [nix](https://nixos.org/download) package manager installed 
-- [Enable flakes](https://nixos.wiki/wiki/Flakes#Permanent)
-- `nix profile install nixpkgs#direnv`
-- [hook direnv into your shell](https://direnv.net/docs/hook.html)
-- `cp .envrc.example .envrc` - feel free to customize this
-- `direnv allow`
-- `git lfs install && git lfs pull`
-
 ## Contributions
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

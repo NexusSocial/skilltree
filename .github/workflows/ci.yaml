@@ -20,28 +20,27 @@ jobs:
 
   check:
     name: Build and Test
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest-arm64]
+    runs-on: ${{ matrix.os }}
     steps:
+      - name: Install dependencies
+        if: ${{ startsWith(matrix.os, 'ubuntu') }}
+        run: |
+          sudo apt-get -y install \
+            libasound2-dev \
+            libudev-dev \
+            libx11-dev
       - uses: actions/checkout@v3
-      - name: Install nix
-        uses: cachix/install-nix-action@v22
-      - name: Set up nix cache
-        uses: cachix/cachix-action@v12
-        continue-on-error: true
-        with:
-          name: nexus-ci
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Cache cargo dependencies
         uses: Swatinem/rust-cache@v2
       - name: Clippy lints
         run: |
-          nix develop -ic \
             cargo clippy --all --all-features --all-targets --no-deps -- -Dwarnings
       - name: Cargo Doc
         run: |
-          nix develop -ic \
             cargo doc --all --all-features --no-deps --document-private-items
       - name: Cargo Test
         run: |
-          nix develop -ic \
             cargo test --all --all-features --all-targets
