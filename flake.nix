@@ -38,9 +38,7 @@
         # `nix develop` pulls all of this in to become your shell.
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = [
-            rustToolchain
             pkgs.pkg-config
-            pkgs.androidenv.androidPkgs_9_0.androidsdk
 
             # Common cargo tools we often use
             pkgs.cargo-deny
@@ -55,6 +53,8 @@
           buildInputs = [
             pkgs.zstd
           ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux (with pkgs; [
+            pkgs.androidenv.androidPkgs_9_0.androidsdk
+            rustToolchain
             alsa-lib
             libxkbcommon
             udev
