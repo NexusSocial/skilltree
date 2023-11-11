@@ -46,7 +46,7 @@ fn setup(
 	mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
 	let bevy_mirror_dwelling_img: Handle<Image> =
-		assets.load(&(ASSET_FOLDER.to_string() + "bevy_mirror_dwelling.png"));
+		assets.load(ASSET_FOLDER.to_string() + "bevy_mirror_dwelling.png");
 	commands.spawn(PbrBundle {
 		mesh: meshes.add(shape::Cube::default().into()),
 		material: materials.add(StandardMaterial {
@@ -164,7 +164,7 @@ fn setup(
 	},));
 	commands.spawn((
 		SceneBundle {
-			scene: assets.load(&(ASSET_FOLDER.to_string() + "/malek.gltf#Scene0")),
+			scene: assets.load(ASSET_FOLDER.to_string() + "/malek.gltf#Scene0"),
 			transform: Transform::from_xyz(0.0, 0.0, 0.0).with_rotation(
 				Quat::from_euler(EulerRot::XYZ, 0.0, 0.0_f32.to_radians(), 0.0),
 			),

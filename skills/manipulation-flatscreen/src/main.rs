@@ -61,7 +61,7 @@ pub fn add_events(entity_commands: &mut EntityCommands) {
 			}
 		}),
 		PickableBundle::default(), // Makes the entity pickable
-		RaycastPickable::default(),
+		RaycastPickable,
 	));
 }
 
@@ -104,7 +104,7 @@ fn setup(
 				.looking_at(Vec3::new(0., 1., 0.), Vec3::Y),
 			..default()
 		},
-		RaycastPickable::default(),
+		RaycastPickable,
 	));
 	commands.spawn(PbrBundle {
 		mesh: meshes.add(
