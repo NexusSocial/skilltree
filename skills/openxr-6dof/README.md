@@ -11,7 +11,7 @@ cargo run -p openxr-6dof
 
 Download the [oculus sdk](https://developer.oculus.com/downloads/package/oculus-openxr-mobile-sdk/) and place `OpenXR/Libs/Android/arm64-v8a/Release/libopenxr_loader.so` into the `rumtime_libs/arm64-v8a/` folder.
 
-Install `xbuild`: 
+Install `xbuild`. **It is very important to pass --git**: 
 ```sh
 cargo install xbuild --git https://github.com/rust-mobile/xbuild
 ```
