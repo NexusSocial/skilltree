@@ -40,7 +40,6 @@
           nativeBuildInputs = [
             rustToolchain
             pkgs.pkg-config
-            pkgs.androidenv.androidPkgs_9_0.androidsdk
 
             # Common cargo tools we often use
             pkgs.cargo-deny
@@ -49,12 +48,14 @@
             pkgs.cargo-apk
             # cmake for openxr
             pkgs.cmake
-            pkgs.openxr-loader
-          ];
+          ] ++ pkgs.lib.optionals (!pkgs.stdenv.isDarwin) (with pkgs; [
+            androidenv.androidPkgs_9_0.androidsdk
+          ]);
 
           # see https://github.com/NixOS/nixpkgs/blob/95b81c96f863ca8911dffcda45d1937efcd66a4b/pkgs/games/jumpy/default.nix#L60C5-L60C38
           buildInputs = [
             pkgs.zstd
+            rustPlatform.bindgenHook
           ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux (with pkgs; [
             alsa-lib
             libxkbcommon
@@ -65,9 +66,9 @@
             xorg.libXcursor
             xorg.libXi
             xorg.libXrandr
+            openxr-loader
           ]) ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
             pkgs.darwin.apple_sdk.frameworks.Cocoa
-            rustPlatform.bindgenHook
             # # This is missing on mac m1 nix, for some reason.
             # # see https://stackoverflow.com/a/69732679
             pkgs.libiconv
