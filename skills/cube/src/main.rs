@@ -12,7 +12,7 @@ fn main() -> Result<()> {
 
 	App::new()
 		.add_plugins(DefaultPlugins.set(AssetPlugin {
-			asset_folder: ASSET_FOLDER.to_string(),
+			file_path: ASSET_FOLDER.to_string(),
 			..Default::default()
 		}))
 		.add_systems(Startup, setup)

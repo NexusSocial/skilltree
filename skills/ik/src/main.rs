@@ -13,7 +13,7 @@ fn main() {
 		})
 		.insert_resource(DirectionalLightShadowMap { size: 4096 })
 		.add_plugins(DefaultPlugins.set(AssetPlugin {
-			asset_folder: ASSET_FOLDER.to_string(),
+			file_path: ASSET_FOLDER.to_string(),
 			..Default::default()
 		}))
 		.add_plugins(InverseKinematicsPlugin)
@@ -181,7 +181,7 @@ fn manually_target(
 ) {
 	let (camera, transform) = camera_query.single();
 
-	if let Some(event) = cursor.iter().last() {
+	if let Some(event) = cursor.read().last() {
 		let view = transform.compute_matrix();
 		let viewport_rect = camera.logical_viewport_rect().unwrap();
 		let viewport_size = viewport_rect.size();

@@ -9,11 +9,11 @@ use bevy::render::render_resource::{
 };
 use bevy::transform::components::Transform;
 
-use bevy_openxr::input::XrInput;
-use bevy_openxr::resources::XrFrameState;
-use bevy_openxr::xr_input::oculus_touch::OculusController;
-use bevy_openxr::xr_input::{QuatConv, Vec3Conv};
-use bevy_openxr::DefaultXrPlugins;
+use bevy_oxr::input::XrInput;
+use bevy_oxr::resources::XrFrameState;
+use bevy_oxr::xr_input::oculus_touch::OculusController;
+use bevy_oxr::xr_input::{QuatConv, Vec3Conv};
+use bevy_oxr::DefaultXrPlugins;
 
 const ASSET_FOLDER: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/../../assets/");
 

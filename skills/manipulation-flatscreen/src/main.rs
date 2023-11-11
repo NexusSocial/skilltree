@@ -1,8 +1,9 @@
 use bevy::ecs::system::EntityCommands;
 use bevy::{pbr::DirectionalLightShadowMap, prelude::*};
+use bevy_mod_picking::backends::raycast::RaycastPickable;
 use bevy_mod_picking::events::Drag;
 use bevy_mod_picking::pointer::PointerButton;
-use bevy_mod_picking::prelude::{On, Pointer, RaycastPickCamera, RaycastPickTarget};
+use bevy_mod_picking::prelude::{On, Pointer};
 use bevy_mod_picking::{DefaultPickingPlugins, PickableBundle};
 use color_eyre::eyre::Result;
 use tracing::info;
@@ -17,7 +18,7 @@ fn main() -> Result<()> {
 
 	App::new()
 		.add_plugins(DefaultPlugins.set(AssetPlugin {
-			asset_folder: ASSET_FOLDER.to_string(),
+			file_path: ASSET_FOLDER.to_string(),
 			..Default::default()
 		}))
 		.add_plugins(DefaultPickingPlugins)
@@ -60,7 +61,7 @@ pub fn add_events(entity_commands: &mut EntityCommands) {
 			}
 		}),
 		PickableBundle::default(), // Makes the entity pickable
-		RaycastPickTarget::default(),
+		RaycastPickable::default(),
 	));
 }
 
@@ -103,7 +104,7 @@ fn setup(
 				.looking_at(Vec3::new(0., 1., 0.), Vec3::Y),
 			..default()
 		},
-		RaycastPickCamera::default(),
+		RaycastPickable::default(),
 	));
 	commands.spawn(PbrBundle {
 		mesh: meshes.add(

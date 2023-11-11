@@ -9,7 +9,7 @@ rust-version.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy = { git = "https://github.com/awtterpip/bevy" }
-bevy_openxr = { git = "https://github.com/awtterpip/bevy_openxr", features = ["linked"] }
+bevy.workspace = true
+bevy_oxr.workspace = true
 color-eyre.workspace = true
-bevy_mod_inverse_kinematics = { git = "https://github.com/MalekiRe/bevy_mod_inverse_kinematics"}
+bevy_mod_inverse_kinematics.workspace = true

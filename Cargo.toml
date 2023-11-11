@@ -18,17 +18,20 @@ edition = "2021"
 rust-version = "1.73.0"
 
 [workspace.dependencies]
-bevy = "0.11.2"
-bevy_mod_picking = "0.15.0"
+bevy = "0.12.0"
+bevy_mod_picking = "0.17.0"
 color-eyre = "0.6"
 eyre = "0.6"
 tracing = "0.1"
-bevy_egui = "0.21"
-egui-wgpu = "0.22"
-egui = "0.22"
-bevy-inspector-egui = "0.19"
-wgpu = "0.16"
-bevy_flycam = { git = "https://github.com/sburris0/bevy_flycam", branch = "bevy_0.11" }
+bevy_egui = "0.23"
+egui-wgpu = "0.23"
+egui = "0.23"
+bevy-inspector-egui = "0.21.0"
+wgpu = "0.17"
+bevy_flycam = "0.12"
+bevy_oxr = { version = "0.1", default-features = false }
+openxr = { version = "0.17.1" }
+bevy_mod_inverse_kinematics = "0.5"
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]
