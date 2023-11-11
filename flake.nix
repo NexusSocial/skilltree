@@ -46,9 +46,10 @@
             pkgs.cargo-deny
             pkgs.cargo-expand
             pkgs.cargo-binutils
-			pkgs.cargo-apk
+            pkgs.cargo-apk
             # cmake for openxr
             pkgs.cmake
+            pkgs.openxr-loader
           ];
 
           # see https://github.com/NixOS/nixpkgs/blob/95b81c96f863ca8911dffcda45d1937efcd66a4b/pkgs/games/jumpy/default.nix#L60C5-L60C38

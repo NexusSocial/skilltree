@@ -29,8 +29,8 @@ egui = "0.23"
 bevy-inspector-egui = "0.21.0"
 wgpu = "0.17"
 bevy_flycam = "0.12"
-bevy_oxr = { version = "0.1", default-features = false }
-openxr = { version = "0.17.1" }
+bevy_oxr = "0.1"
+openxr = "0.17.1"
 bevy_mod_inverse_kinematics = "0.5"
 
 # Enable a small amount of optimization in debug mode

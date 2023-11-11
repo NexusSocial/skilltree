@@ -14,7 +14,3 @@ openxr.workspace = true
 bevy.workspace = true
 bevy_oxr.workspace = true
 color-eyre.workspace = true
-
-[target.'cfg(not(target_os = "android"))'.dependencies]
-bevy_oxr = { workspace = true, default-features = false }
-openxr = { workspace = true, features = ["static"] }
