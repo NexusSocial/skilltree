@@ -57,7 +57,7 @@
             pkgs.zstd
             rustPlatform.bindgenHook
           ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux (with pkgs; [
-            alsa-lib
+            alsa-lib.dev
             libxkbcommon
             udev
             vulkan-loader
