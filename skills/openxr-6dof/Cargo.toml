@@ -7,10 +7,10 @@ edition.workspace = true
 rust-version.workspace = true
 
 [lib]
-crate-type = ["staticlib", "cdylib", "rlib"]
+crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-openxr = { version = "0.17.1" }
-bevy = "0.12"
-bevy_oxr = { version = "0.1", default-features = false }
+openxr.workspace = true
+bevy.workspace = true
+bevy_oxr.workspace = true
 color-eyre.workspace = true
