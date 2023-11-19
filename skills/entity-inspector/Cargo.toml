@@ -1,0 +1,19 @@
+[package]
+name = "entity-inspector"
+version.workspace = true
+license.workspace = true
+repository.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish = false
+
+# Current maintainer(s)
+authors = ["Ryan Butler <thebutlah@gmail.com>"]
+
+[dependencies]
+bevy.workspace = true
+egui.workspace = true
+bevy_egui.workspace = true
+bevy-inspector-egui.workspace = true
+color-eyre.workspace = true
+tracing.workspace = true
