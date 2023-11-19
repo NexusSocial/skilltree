@@ -8,7 +8,7 @@ rust-version.workspace = true
 publish = false
 
 # Current maintainer(s)
-authors = ["Ryan Butler <thebutlah@gmail.com>"]
+authors = ["lucas lelievre <loucass003@gmail.com>"]
 
 [dependencies]
 bevy.workspace = true
