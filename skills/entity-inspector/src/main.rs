@@ -1,8 +1,10 @@
 use bevy::{pbr::DirectionalLightShadowMap, prelude::*, window::PrimaryWindow};
-use bevy_inspector_egui::{DefaultInspectorConfigPlugin, bevy_inspector::{hierarchy::SelectedEntities}};
+use bevy_egui::{EguiContext, EguiPlugin};
+use bevy_inspector_egui::{
+	bevy_inspector::hierarchy::SelectedEntities, DefaultInspectorConfigPlugin,
+};
 use color_eyre::eyre::Result;
 use tracing::info;
-use bevy_egui::{EguiPlugin, EguiContext};
 
 const ASSET_FOLDER: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/../../assets/");
 
@@ -86,10 +88,10 @@ fn animate_light(mut query: Query<&mut Transform, With<DirectionalLight>>) {
 }
 
 fn inspector_ui(world: &mut World, mut selected_entities: Local<SelectedEntities>) {
-    let mut egui_context = world
-    .query_filtered::<&mut EguiContext, With<PrimaryWindow>>()
-    .single(world)
-    .clone();
+	let mut egui_context = world
+		.query_filtered::<&mut EguiContext, With<PrimaryWindow>>()
+		.single(world)
+		.clone();
 
 	egui::SidePanel::left("hierarchy")
 		.default_width(200.0)
@@ -116,7 +118,9 @@ fn inspector_ui(world: &mut World, mut selected_entities: Local<SelectedEntities
 
 				match selected_entities.as_slice() {
 					&[entity] => {
-						bevy_inspector_egui::bevy_inspector::ui_for_entity(world, entity, ui);
+						bevy_inspector_egui::bevy_inspector::ui_for_entity(
+							world, entity, ui,
+						);
 					}
 					entities => {
 						bevy_inspector_egui::bevy_inspector::ui_for_entities_shared_components(
