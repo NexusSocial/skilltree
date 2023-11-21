@@ -49,6 +49,8 @@
             # cmake for openxr
             pkgs.cmake
           ] ++ pkgs.lib.optionals (!pkgs.stdenv.isDarwin) (with pkgs; [
+            alsa-lib
+            alsa-lib.dev
             androidenv.androidPkgs_9_0.androidsdk
           ]);
 
@@ -57,6 +59,7 @@
             pkgs.zstd
             rustPlatform.bindgenHook
           ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux (with pkgs; [
+            alsa-lib
             alsa-lib.dev
             libxkbcommon
             udev

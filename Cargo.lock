@@ -897,7 +897,7 @@ dependencies = [
  "ash",
  "bevy",
  "mint",
- "openxr",
+ "openxr 0.17.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "wgpu",
  "wgpu-core",
  "wgpu-hal",
@@ -3074,7 +3074,18 @@ dependencies = [
  "libc",
  "libloading 0.7.4",
  "ndk-context",
- "openxr-sys",
+ "openxr-sys 0.9.3 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "openxr"
+version = "0.17.1"
+source = "git+https://github.com/TheButlah/openxrs?branch=add-links#a30ae78be09dd7003c03e204e8c60a83217c6a4c"
+dependencies = [
+ "libc",
+ "libloading 0.8.1",
+ "ndk-context",
+ "openxr-sys 0.9.3 (git+https://github.com/TheButlah/openxrs?branch=add-links)",
 ]
 
 [[package]]
@@ -3084,7 +3095,7 @@ dependencies = [
  "bevy",
  "bevy_oxr",
  "color-eyre",
- "openxr",
+ "openxr 0.17.1 (git+https://github.com/TheButlah/openxrs?branch=add-links)",
 ]
 
 [[package]]
@@ -3097,6 +3108,14 @@ dependencies = [
  "jni 0.19.0",
  "libc",
  "mint",
+]
+
+[[package]]
+name = "openxr-sys"
+version = "0.9.3"
+source = "git+https://github.com/TheButlah/openxrs?branch=add-links#a30ae78be09dd7003c03e204e8c60a83217c6a4c"
+dependencies = [
+ "libc",
 ]
 
 [[package]]
