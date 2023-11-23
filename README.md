@@ -87,9 +87,9 @@ using an existing plugin. VR is not necessary.
 The skills in this section are all focused on math heavy parts of 3D game engines. VR is not necessary.
 
 - 🫵 📋 Rigid body collision physics
-- 🚧 [VR Inverse Kinematics](skills/xr-ik-mirror)
+- 🚧 [VR Inverse Kinematics](skills/xr-ik-mirror) (implemented but awful quality. Improvements appreciated)
+- ✅ Animate blendshapes/morph targets on a skinned mesh
 - 📋 Jiggle physics/Dynamic bones
-- 📋 Animate blendshapes/morph targets on a skinned mesh
 - 🥺 ❌ Cloth or hair physics (blocked on a physics engine that does this)
 
 #### Audio
