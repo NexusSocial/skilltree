@@ -8,6 +8,7 @@ members = [
 	"skills/openxr-6dof",
 	"skills/xr-ik-mirror",
 	"skills/entity-inspector",
+	"skills/blendshapes",
 ]
 
 # These settings will apply to all members of the workspace that opt in to them

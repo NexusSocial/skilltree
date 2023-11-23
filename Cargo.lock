@@ -1417,6 +1417,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "blendshapes"
+version = "0.0.0"
+dependencies = [
+ "bevy",
+ "bevy-inspector-egui",
+ "bevy_egui",
+ "color-eyre",
+ "egui",
+]
+
+[[package]]
 name = "block"
 version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
