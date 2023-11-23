@@ -31,7 +31,7 @@ bevy-inspector-egui = "0.21.0"
 wgpu = "0.17"
 bevy_flycam = "0.12"
 bevy_oxr = "0.1"
-openxr = { git="https://github.com/Ralith/openxrs", rev = "361b27e" }
+openxr = { git = "https://github.com/Ralith/openxrs", rev = "361b27e" }
 bevy_mod_inverse_kinematics = "0.5"
 
 # Enable a small amount of optimization in debug mode
