@@ -1,8 +1,9 @@
-# `IK & FK`
+# Blendshapes and Morph Targets
 
-Inverse Kinematics and Forward Kinematics
+Demonstrates how to use morph targets to animate the blend shapes. For example
+to make a gltf avatar blink.
 
 To run the code:
 ```bash
-cargo run -p ik
+cargo run -p blendshapes
 ```
