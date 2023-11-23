@@ -1,6 +1,6 @@
 android:
   runtime_libs:
-    - "runtime_libs"
+    - "../../assets/runtime_libs"
   manifest:
     package: "com.github.nexussocial.skilltree.openxr_6dof"
     uses_feature:
