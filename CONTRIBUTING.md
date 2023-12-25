@@ -13,17 +13,3 @@ Thanks for helping out with Nexus!
 * Dependencies of your code should not use viral licenses like GPL or LGPL (MPL is
   fine) or unlicensed code - if you're not sure, feel free to ask us if the license is
   ok.
-
-## License
-
-Unless otherwise specified, all code in this repository is dual-licensed under
-either:
-
-- MIT License ([LICENSE-MIT](LICENSE-MIT))
-- BSD 2-Clause Plus Patent License ([LICENSE-BSD](LICENSE-BSD))
-
-at your option. This means you can select the license you prefer!
-
-Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in the work by you, shall be dual licensed as above, without any
-additional terms or conditions.
