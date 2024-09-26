@@ -131,12 +131,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-Unless otherwise specified, all code in this repository is triple-licensed under
+Unless otherwise specified, all code in this repository is dual-licensed under
 either:
 
-- MIT License ([LICENSE-MIT](LICENSE-MIT))
+- MIT-0 License ([LICENSE-MIT-0](LICENSE-MIT-0))
 - Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE))
-- BSD 2-Clause Plus Patent License ([LICENSE-BSD](LICENSE-BSD))
 
 at your option. This means you can select the license you prefer!
 
