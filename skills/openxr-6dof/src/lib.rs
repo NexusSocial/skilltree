@@ -6,6 +6,9 @@ use bevy_oxr::resources::XrFrameState;
 use bevy_oxr::xr_input::oculus_touch::OculusController;
 use bevy_oxr::xr_input::{QuatConv, Vec3Conv};
 use bevy_oxr::DefaultXrPlugins;
+use bevy_oxr::xr_input::trackers::{
+    OpenXRController, OpenXRLeftController, OpenXRRightController, OpenXRTracker,
+};
 
 #[bevy_main]
 pub fn main() {
@@ -55,6 +58,21 @@ fn setup(
 		transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
 		..default()
 	},));
+	//left hand
+	commands.spawn((
+		OpenXRLeftController,
+		OpenXRController,
+		OpenXRTracker,
+		SpatialBundle::default(),
+	));
+	//right hand
+	commands.spawn((
+		OpenXRRightController,
+		OpenXRController,
+		OpenXRTracker,
+		SpatialBundle::default(),
+	));
+
 }
 
 fn hands(
